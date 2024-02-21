@@ -17,12 +17,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  login,
+  signUp,
+  logout,
 }: Readonly<{
   children: React.ReactNode;
+  login: React.ReactNode;
+  signUp: React.ReactNode;
+  logout: React.ReactNode;
 }>) {
+  const isLoggedIn = false;
   return (
     <html lang="en">
-      <body className={balsamiq.className}>{children}</body>
+      <body className={balsamiq.className}>
+        {children}
+        {!isLoggedIn && login}
+      </body>
     </html>
   );
 }
