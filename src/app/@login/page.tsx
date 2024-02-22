@@ -5,17 +5,22 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  IconButton,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CreateUser from "@/lib/create-user";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import * as z from "zod";
 
 export default function Login() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [terms, setTerms] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    username: "",
+    password: "",
+    showPassword: false,
+    terms: false,
+  });
   const [error, setError] = useState({
     email: {
       message: "",
@@ -50,14 +55,18 @@ export default function Login() {
     }),
   });
 
-  const validateInput = (key: string): boolean => {
-    const values: { [key: string]: string | boolean } = {
-      email,
-      username,
-      password,
-      terms,
-    };
-    const value = values[key];
+  const handleTogglePasswordVisibility = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      showPassword: !prevData.showPassword,
+    }));
+  };
+
+  const validateInput = (key: string, value: string | boolean) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
     setError((prevError) => ({
       ...prevError,
       [key]: {
@@ -67,7 +76,7 @@ export default function Login() {
     }));
     try {
       schema.parse({ [key]: value });
-    } catch (e: any) {
+    } catch (e) {
       if (e instanceof z.ZodError) {
         e.errors.forEach((error) => {
           if (error.path.includes(key)) {
@@ -85,20 +94,15 @@ export default function Login() {
     return !error[key as keyof typeof error].error;
   };
 
-  const Action = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      validateInput("email") &&
-      validateInput("username") &&
-      validateInput("password") &&
-      validateInput("terms")
+      validateInput("email", formData.email) &&
+      validateInput("username", formData.username) &&
+      validateInput("password", formData.password) &&
+      validateInput("terms", formData.terms)
     ) {
-      const data = {
-        email,
-        username,
-        password,
-      };
-      CreateUser(data).then((res) => {
+      CreateUser(formData).then((res) => {
         console.log(res);
       });
     }
@@ -119,26 +123,21 @@ export default function Login() {
         color: "black",
       }}
     >
-      <form onSubmit={Action} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <TextField
-          value={email}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEmail(e.target.value);
-            validateInput("email");
-          }}
+          value={formData.email}
+          onChange={(e) => validateInput("email", e.target.value)}
           type="email"
           id="email"
           label="Email*"
           variant="outlined"
           error={error.email.error}
           helperText={error.email.message}
+          autoComplete="on"
         />
         <TextField
-          value={username}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setUsername(e.target.value);
-            validateInput("username");
-          }}
+          value={formData.username}
+          onChange={(e) => validateInput("username", e.target.value)}
           type="text"
           id="username"
           label="Username*"
@@ -147,12 +146,16 @@ export default function Login() {
           helperText={error.username.message}
         />
         <TextField
-          value={password}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPassword(e.target.value);
-            validateInput("password");
+          value={formData.password}
+          onChange={(e) => validateInput("password", e.target.value)}
+          type={formData.showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={handleTogglePasswordVisibility} edge="end">
+                {formData.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            ),
           }}
-          type="password"
           id="password"
           label="Password*"
           variant="outlined"
@@ -162,11 +165,8 @@ export default function Login() {
         <FormControlLabel
           control={
             <Checkbox
-              value={terms}
-              onChange={() => {
-                setTerms(!terms);
-                validateInput("terms");
-              }}
+              checked={formData.terms}
+              onChange={(e) => validateInput("terms", e.target.checked)}
             />
           }
           label="I accept the terms and conditions"
