@@ -14,11 +14,14 @@ import CreateUser from "@/lib/create-user";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/lib/theme";
+import { useRouter } from "next/navigation";
 
 import * as z from "zod";
 
 export default function SignUp() {
+  const router = useRouter();
   const theme = createTheme(themeOptions);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -27,6 +30,10 @@ export default function SignUp() {
     terms: false,
   });
   const [error, setError] = useState({
+    main: {
+      message: "",
+      error: false,
+    },
     email: {
       message: "",
       error: false,
@@ -69,6 +76,7 @@ export default function SignUp() {
   };
 
   const validateInput = (key: string, value: string | boolean) => {
+    let data;
     setFormData((prevData) => ({
       ...prevData,
       [key]: value,
@@ -80,8 +88,10 @@ export default function SignUp() {
         error: false,
       },
     }));
+
     try {
-      schema.parse({ [key]: value });
+      schema.parse({ ...formData, [key]: value });
+      return (data = true);
     } catch (e) {
       if (e instanceof z.ZodError) {
         e.errors.forEach((error) => {
@@ -96,26 +106,63 @@ export default function SignUp() {
           }
         });
       }
+      return (data = false);
     }
-    return !error[key as keyof typeof error].error;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let allValidationsPass = false;
+    validateInput("email", formData.email);
+    validateInput("password", formData.password);
+    validateInput("username", formData.username);
+    validateInput("terms", formData.terms);
     if (
       validateInput("email", formData.email) &&
-      validateInput("username", formData.username) &&
       validateInput("password", formData.password) &&
+      validateInput("username", formData.username) &&
       validateInput("terms", formData.terms)
     ) {
+      allValidationsPass = true;
+    }
+
+    if (allValidationsPass) {
+      setLoading(true);
       CreateUser(formData).then((res) => {
-        console.log(res);
+        if (res.error) {
+          setError((prevError) => ({
+            ...prevError,
+            main: {
+              message:
+                res.error === "User already exists"
+                  ? "User already exists"
+                  : "Creating user failed",
+              error: true,
+            },
+          }));
+          setLoading(false);
+        }
+        // Handle success case here
+        if (!res.error) {
+          setLoading(false);
+          setError((prevError) => ({
+            ...prevError,
+            main: {
+              message: "User created successfully",
+              error: false,
+            },
+          }));
+          router.push("/login");
+        }
       });
     } else {
-      validateInput("email", formData.email);
-      validateInput("username", formData.username);
-      validateInput("password", formData.password);
-      validateInput("terms", formData.terms);
+      setError((prevError) => ({
+        ...prevError,
+        main: {
+          message: "Validation failed",
+          error: true,
+        },
+      }));
     }
   };
 
@@ -211,12 +258,13 @@ export default function SignUp() {
               />
             }
             label={
-              <span>
+              <span style={{ color: error.terms.error ? "#e57373" : "black" }}>
                 I have read and agree to the{" "}
                 <Link
                   href="https://www.google.com"
                   target="_blank"
                   rel="noreferrer"
+                  color={error.terms.error ? "error" : "primary"}
                 >
                   terms and conditions
                 </Link>
@@ -227,6 +275,13 @@ export default function SignUp() {
           <Button type="submit" variant="outlined">
             SignUp
           </Button>
+          <Typography
+            variant="body1"
+            color={error.main.error ? "error" : "green"}
+            sx={{ textAlign: "center" }}
+          >
+            {error.main.message}
+          </Typography>
         </form>
       </Box>
     </ThemeProvider>
