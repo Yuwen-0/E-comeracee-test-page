@@ -16,7 +16,7 @@ export default function SignUpLayout({
           height: "100vh",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(to bottom right, #25a3d2, #f5f5f5);",
+          background: "#88d8ec",
         }}
       >
         {children}
