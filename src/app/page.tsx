@@ -1,5 +1,25 @@
 import Image from "next/image";
+import Link from "next/link";
+import authOptions from "./api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
+import { Typography } from "@mui/material";
 
-export default function Home() {
-  return <div>Hello World</div>;
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+  if (session) {
+    return (
+      <div>
+        <h1>Hello {session.user?.username}</h1>
+        <Typography>{session.user?.email}</Typography>
+        <Link href="/logout">Logout</Link>
+      </div>
+    );
+  }
+  return (
+    <div>
+      Hello World {"       "}
+      <Link href="/login">Login</Link>
+    </div>
+  );
 }

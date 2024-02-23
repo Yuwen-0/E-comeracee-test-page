@@ -10,7 +10,7 @@ import {
   Link,
 } from "@mui/material";
 import { useState } from "react";
-import CreateUser from "@/lib/create-user";
+import { CreateUser } from "@/lib/auth";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/lib/theme";
@@ -172,7 +172,7 @@ export default function SignUp() {
         sx={{
           width: "400px",
           padding: "20px 30px",
-          height: "500px",
+          height: "570px",
           backgroundColor: "whitesmoke",
           borderRadius: "10px",
           border: "1px solid gray",
@@ -271,17 +271,39 @@ export default function SignUp() {
               </span>
             }
           />
-
-          <Button type="submit" variant="outlined">
-            SignUp
-          </Button>
-          <Typography
-            variant="body1"
-            color={error.main.error ? "error" : "green"}
-            sx={{ textAlign: "center" }}
-          >
-            {error.main.message}
-          </Typography>
+          <Box sx={{ position: "relative" }}>
+            <Button sx={{ width: "100%" }} type="submit" variant="outlined">
+              SignUp
+            </Button>
+            <Typography
+              variant="body1"
+              color={error.main.error ? "error" : "green"}
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                position: "absolute",
+                top: "35px",
+              }}
+            >
+              {error.main.message}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "20px",
+                marginBottom: "20px",
+                gap: "10px",
+              }}
+            >
+              <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
+              <Typography variant="body1">OR</Typography>
+              <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
+            </Box>
+            <Button sx={{ width: "100%" }} type="submit" variant="outlined">
+              SignUp with Google
+            </Button>
+          </Box>
         </form>
       </Box>
     </ThemeProvider>

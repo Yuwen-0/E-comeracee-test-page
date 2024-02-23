@@ -4,7 +4,7 @@ type UserData = {
     password: string;
 }
 
-const CreateUser = async (data: UserData) => {
+export const CreateUser = async (data: UserData) => {
     const {email,username,password} = data
     const response = await fetch("/api/customer", {
         method: "POST",
@@ -17,4 +17,14 @@ const CreateUser = async (data: UserData) => {
     return res;
 }
 
-export default CreateUser;
+export const LoginUser = async (data: any): Promise<any> => {
+    const response = await fetch("/api/customer", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const res = await response.json();
+    return res;
+}

@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body  className={balsamiq.className}>{children}</body>
+      <body className={balsamiq.className}>{children}</body>
     </html>
   );
 }
