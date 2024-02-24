@@ -6,19 +6,18 @@ import { Typography } from "@mui/material";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  console.log(session);
-  if (session) {
+  if (session?.user) {
     return (
       <div>
-        <h1>Hello {session.user?.username}</h1>
-        <Typography>{session.user?.email}</Typography>
+        <h1>Hello {session.user.username}</h1>
+        <Typography>{session.user.email}</Typography>
         <Link href="/logout">Logout</Link>
       </div>
     );
   }
   return (
     <div>
-      Hello World {"       "}
+      <h1>Hello </h1>
       <Link href="/login">Login</Link>
     </div>
   );

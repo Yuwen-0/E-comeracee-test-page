@@ -5,9 +5,13 @@ export const themeOptions: ThemeOptions = {
     mode: 'light',
     primary: {
       main: '#1990bf',
+      light: "#f0f5f9",
     },
     secondary: {
       main: '#ffffff',
     },
+    background: {
+      default: "#fff",
+    }
   },
 };

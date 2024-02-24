@@ -7,7 +7,8 @@ import {
   Button,
   IconButton,
   Typography,
-  Link,
+  Link as MLink,
+  CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { CreateUser } from "@/lib/auth";
@@ -112,6 +113,7 @@ export default function SignUp() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     let allValidationsPass = false;
     validateInput("email", formData.email);
     validateInput("password", formData.password);
@@ -127,7 +129,6 @@ export default function SignUp() {
     }
 
     if (allValidationsPass) {
-      setLoading(true);
       CreateUser(formData).then((res) => {
         if (res.error) {
           setError((prevError) => ({
@@ -144,7 +145,6 @@ export default function SignUp() {
         }
         // Handle success case here
         if (!res.error) {
-          setLoading(false);
           setError((prevError) => ({
             ...prevError,
             main: {
@@ -152,17 +152,10 @@ export default function SignUp() {
               error: false,
             },
           }));
+          setLoading(false);
           router.push("/login");
         }
       });
-    } else {
-      setError((prevError) => ({
-        ...prevError,
-        main: {
-          message: "Validation failed",
-          error: true,
-        },
-      }));
     }
   };
 
@@ -172,13 +165,31 @@ export default function SignUp() {
         sx={{
           width: "400px",
           padding: "20px 30px",
-          height: "570px",
+          height: "620px",
           backgroundColor: "whitesmoke",
           borderRadius: "10px",
           border: "1px solid gray",
           color: "black",
+          position: "relative",
         }}
       >
+        {loading && (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              top: "0",
+              left: "0",
+              backgroundColor: "rgba(0, 0, 0, 0.507)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "absolute",
+            }}
+          >
+            <CircularProgress size={70} sx={{ color: "white" }} />
+          </Box>
+        )}
         <Typography
           variant="h4"
           sx={{ marginBottom: "12px", textAlign: "center" }}
@@ -203,6 +214,7 @@ export default function SignUp() {
               label="Email*"
               variant="outlined"
               error={error.email.error}
+              disabled={loading}
               helperText={
                 <span style={{ position: "absolute" }}>
                   {error.email.message}
@@ -217,6 +229,7 @@ export default function SignUp() {
               id="username"
               label="Username*"
               variant="outlined"
+              disabled={loading}
               error={error.username.error}
               helperText={
                 <span style={{ position: "absolute" }}>
@@ -228,9 +241,11 @@ export default function SignUp() {
               value={formData.password}
               onChange={(e) => validateInput("password", e.target.value)}
               type={formData.showPassword ? "text" : "password"}
+              disabled={loading}
               InputProps={{
                 endAdornment: (
                   <IconButton
+                    disabled={loading}
                     onClick={handleTogglePasswordVisibility}
                     edge="end"
                   >
@@ -254,25 +269,31 @@ export default function SignUp() {
             control={
               <Checkbox
                 checked={formData.terms}
+                disabled={loading}
                 onChange={(e) => validateInput("terms", e.target.checked)}
               />
             }
             label={
               <span style={{ color: error.terms.error ? "#e57373" : "black" }}>
                 I have read and agree to the{" "}
-                <Link
+                <MLink
                   href="https://www.google.com"
                   target="_blank"
                   rel="noreferrer"
                   color={error.terms.error ? "error" : "primary"}
                 >
                   terms and conditions
-                </Link>
+                </MLink>
               </span>
             }
           />
           <Box sx={{ position: "relative" }}>
-            <Button sx={{ width: "100%" }} type="submit" variant="outlined">
+            <Button
+              disabled={loading}
+              sx={{ width: "100%" }}
+              type="submit"
+              variant="outlined"
+            >
               SignUp
             </Button>
             <Typography
@@ -300,9 +321,21 @@ export default function SignUp() {
               <Typography variant="body1">OR</Typography>
               <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
             </Box>
-            <Button sx={{ width: "100%" }} type="submit" variant="outlined">
+            <Button
+              disabled={loading}
+              sx={{ width: "100%" }}
+              type="submit"
+              variant="outlined"
+            >
               SignUp with Google
             </Button>
+            <Typography
+              variant="body1"
+              sx={{ textAlign: "center", marginTop: "20px" }}
+            >
+              if you already have an account{" "}
+              <MLink href={loading ? "#" : "/login"}>Login</MLink>
+            </Typography>
           </Box>
         </form>
       </Box>

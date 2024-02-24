@@ -48,7 +48,8 @@ const authOptions: NextAuthOptions = {
         async jwt({ token, user}) {
             if (user) {
                 return{
-                    ...token,
+                    id: user.id,
+                    email: user.email,
                     username: user.username
                 }
             }
@@ -58,7 +59,8 @@ const authOptions: NextAuthOptions = {
             return{
                 ...session,
                 user: {
-                    ...session.user,
+                    id: token.id,
+                    email: token.email,
                     username: token.username
                 }
             }

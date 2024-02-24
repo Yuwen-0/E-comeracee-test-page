@@ -6,6 +6,7 @@ import {
   IconButton,
   Typography,
   Link as MLink,
+  CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -94,6 +95,7 @@ export default function Login() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     let allValidationsPass = false;
     validateInput("username", formData.username);
@@ -123,7 +125,9 @@ export default function Login() {
             error: true,
           },
         }));
+        setLoading(false);
       } else {
+        setLoading(false);
         router.push("/");
       }
     } else {
@@ -134,6 +138,7 @@ export default function Login() {
           error: true,
         },
       }));
+      setLoading(false);
     }
   };
 
@@ -148,8 +153,26 @@ export default function Login() {
           borderRadius: "10px",
           border: "1px solid gray",
           color: "black",
+          position: "relative",
         }}
       >
+        {loading && (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              top: "0",
+              left: "0",
+              backgroundColor: "rgba(0, 0, 0, 0.507)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "absolute",
+            }}
+          >
+            <CircularProgress size={70} sx={{ color: "white" }} />
+          </Box>
+        )}
         <Typography
           variant="h4"
           sx={{ marginBottom: "12px", textAlign: "center" }}
@@ -167,6 +190,7 @@ export default function Login() {
             }}
           >
             <TextField
+              disabled={loading}
               value={formData.username}
               onChange={(e) => validateInput("username", e.target.value)}
               type="text"
@@ -181,12 +205,14 @@ export default function Login() {
               }
             />
             <TextField
+              disabled={loading}
               value={formData.password}
               onChange={(e) => validateInput("password", e.target.value)}
               type={formData.showPassword ? "text" : "password"}
               InputProps={{
                 endAdornment: (
                   <IconButton
+                    disabled={loading}
                     onClick={handleTogglePasswordVisibility}
                     edge="end"
                   >
@@ -205,7 +231,12 @@ export default function Login() {
               }
             />
           </Box>
-          <Button sx={{ height: "40px" }} type="submit" variant="outlined">
+          <Button
+            disabled={loading}
+            sx={{ height: "40px" }}
+            type="submit"
+            variant="outlined"
+          >
             Login
           </Button>
           <Box sx={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
@@ -215,7 +246,12 @@ export default function Login() {
             </Typography>
             <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
           </Box>
-          <Button sx={{ height: "40px" }} type="submit" variant="outlined">
+          <Button
+            disabled={loading}
+            sx={{ height: "40px" }}
+            type="submit"
+            variant="outlined"
+          >
             Login With Google
           </Button>
           <Typography variant="body1" sx={{ textAlign: "center" }}>
@@ -223,7 +259,7 @@ export default function Login() {
             <Link
               style={{ color: "#1990bf" }}
               className="hover:underline"
-              href="/sign-up"
+              href={loading ? "#" : "/sign-up"}
             >
               {" "}
               Sign Up
