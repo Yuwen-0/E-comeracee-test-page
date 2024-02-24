@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
-import { CreateUser } from "@/lib/auth";
+import { CreateUser, validateUser } from "@/lib/auth";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/lib/theme";
@@ -76,7 +76,36 @@ export default function SignUp() {
     }));
   };
 
-  const validateInput = (key: string, value: string | boolean) => {
+  const validateInput = async (key: string, value: string | boolean) => {
+    async function handleValidation(key: string, value: string) {
+      const trimmedValue = value.toString().trim();
+      const userExists = await validateUser(trimmedValue, key).then(
+        (res) => res.customerExists
+      );
+
+      if (userExists) {
+        setError((prevError) => ({
+          ...prevError,
+          [key]: {
+            message: `${
+              key.charAt(0).toUpperCase() + key.slice(1)
+            } already exists`,
+            error: true,
+          },
+        }));
+      }
+
+      setFormData((prevData) => ({
+        ...prevData,
+        [key]: trimmedValue,
+      }));
+    }
+    if (key === "email") {
+      handleValidation(key, value as string);
+    }
+    if (key === "username") {
+      handleValidation(key, value as string);
+    }
     let data;
     setFormData((prevData) => ({
       ...prevData,
@@ -111,33 +140,30 @@ export default function SignUp() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     let allValidationsPass = false;
     validateInput("email", formData.email);
     validateInput("password", formData.password);
     validateInput("username", formData.username);
     validateInput("terms", formData.terms);
     if (
-      validateInput("email", formData.email) &&
-      validateInput("password", formData.password) &&
-      validateInput("username", formData.username) &&
-      validateInput("terms", formData.terms)
+      (await validateInput("email", formData.email)) &&
+      (await validateInput("password", formData.password)) &&
+      (await validateInput("username", formData.username)) &&
+      (await validateInput("terms", formData.terms))
     ) {
       allValidationsPass = true;
     }
 
     if (allValidationsPass) {
+      setLoading(true);
       CreateUser(formData).then((res) => {
         if (res.error) {
           setError((prevError) => ({
             ...prevError,
             main: {
-              message:
-                res.error === "User already exists"
-                  ? "User already exists"
-                  : "Creating user failed",
+              message: "User already exists",
               error: true,
             },
           }));
@@ -145,6 +171,7 @@ export default function SignUp() {
         }
         // Handle success case here
         if (!res.error) {
+          setLoading(true);
           setError((prevError) => ({
             ...prevError,
             main: {
