@@ -1,17 +1,13 @@
-import { ThemeOptions } from '@mui/material/styles';
+import { ThemeOptions,Theme } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: '#1990bf',
-      light: "#f0f5f9",
+      main: '#1976d2',
     },
     secondary: {
-      main: '#ffffff',
-    },
-    background: {
-      default: "#fff",
+      main: '#19857b',
     }
-  },
+}
 };

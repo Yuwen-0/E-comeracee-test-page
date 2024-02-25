@@ -8,7 +8,6 @@ body {
   color: white !important;
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
