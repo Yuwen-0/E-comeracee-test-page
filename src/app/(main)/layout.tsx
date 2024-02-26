@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { Balsamiq_Sans } from "next/font/google";
-import "./(main)/globals.css";
+import { Inter, Balsamiq_Sans } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+
+const inter = Inter({ subsets: ["latin"] });
+
 const balsamiq = Balsamiq_Sans({
   subsets: ["latin"],
   weight: "700",
@@ -19,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={balsamiq.className}>{children}</body>
+      <body className={balsamiq.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

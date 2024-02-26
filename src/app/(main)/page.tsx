@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import authOptions from "./api/auth/[...nextauth]/options";
+import authOptions from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { Typography } from "@mui/material";
 
