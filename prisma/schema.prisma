@@ -21,3 +21,31 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Product {
+  id       String @id @default(uuid())
+  name     String @unique
+  category String
+  price    Float
+
+  discount Float @default(0.0)
+  reviews  Int   @default(0)
+
+  brand String @unique
+  stock Int
+
+  releaseDate  DateTime @default(now())
+  featured     Boolean  @default(false)
+  description  String?
+  imageUrl     String?
+  color        String?
+  size         String?
+  material     String?
+  weight       Float?
+  dimensions   String?
+  manufacturer String?
+  rating       Float?
+  warranty     Int?
+  tags         String?
+  shippingInfo String?
+}

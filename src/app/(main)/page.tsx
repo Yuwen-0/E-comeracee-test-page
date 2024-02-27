@@ -2,23 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import authOptions from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import db from "@/lib/db";
+import Product from "@/components/Product";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  if (session?.user) {
-    return (
-      <div>
-        <h1>Hello {session.user.username}</h1>
-        <Typography>{session.user.email}</Typography>
-        <Link href="/logout">Logout</Link>
-      </div>
-    );
-  }
+  const featuredProductElements = await db.product.findMany({
+    where: {
+      featured: true,
+    },
+  });
+
   return (
-    <div>
-      <h1>Hello </h1>
-      <Link href="/login">Login</Link>
-    </div>
+    <Box color={"black"} sx={{ padding: "20px" }}>
+      <Typography>{session?.user ? session.user.username : "Guest"}</Typography>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 20 }}>
+        {featuredProductElements.map((product: any) => (
+          <Product key={product.id} data={product} />
+        ))}
+      </Box>
+    </Box>
   );
 }

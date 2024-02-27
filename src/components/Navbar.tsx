@@ -34,24 +34,45 @@ export default async function Navbar() {
           E-Commerce
         </Typography>
         <Box>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            color="inherit"
-            sx={{ mr: 2 }}
-          >
-            <Avatar
-              sx={{ bgcolor: "primary.main", height: "60px", width: "60px" }}
-              alt="Avatar"
-              src="/avatarTest.jpg"
-            />
-          </IconButton>
           {session?.user ? (
-            <ButtonSignOut></ButtonSignOut>
+            <>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                color="inherit"
+                sx={{ mr: 2 }}
+              >
+                <Avatar
+                  sx={{
+                    bgcolor: "primary.main",
+                    height: "60px",
+                    width: "60px",
+                  }}
+                  alt="Avatar"
+                  src="/avatarTest.jpg"
+                />
+              </IconButton>
+              <ButtonSignOut></ButtonSignOut>
+            </>
           ) : (
-            <Link href="/sign-up">
-              <Button variant="contained">Sign Up</Button>
-            </Link>
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <Link href="/sign-up">
+                <Button
+                  sx={{ color: "white", fontWeight: "600" }}
+                  variant="contained"
+                >
+                  Sign Up
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button
+                  sx={{ color: "white", fontWeight: "600" }}
+                  variant="contained"
+                >
+                  Login
+                </Button>
+              </Link>
+            </Box>
           )}
         </Box>
       </AppBar>
