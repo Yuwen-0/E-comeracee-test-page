@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { Box, Typography } from "@mui/material";
 import db from "@/lib/db";
 import Product from "@/components/Product";
-
+import CatogoryNavBar from "@/components/Navbar/CatogoryNavBar";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   const featuredProductElements = await db.product.findMany({
