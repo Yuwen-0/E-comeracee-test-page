@@ -1,16 +1,5 @@
 "use client";
-import {
-  MenuList,
-  MenuItem,
-  Paper,
-  Popper,
-  IconButton,
-  styled,
-  Typography,
-  Box,
-  Menu,
-} from "@mui/material";
-import { SetStateAction, useState } from "react";
+import { Box } from "@mui/material";
 import Category from "./Category";
 
 const Categories = [
@@ -22,30 +11,81 @@ const Categories = [
         subCategories: ["Macbook", "Dell", "HP", "Asus", "Lenovo"],
         icon: "Laptop",
       },
+      Mobile: {
+        label: "Mobile",
+        subCategories: ["iPhone", "Samsung", "Xiaomi", "Realme", "OnePlus"],
+        icon: "Phone",
+      },
+      Tablet: {
+        label: "Tablet",
+        subCategories: ["Apple", "Samsung", "Xiaomi", "Realme", "OnePlus"],
+        icon: "Tablet",
+      },
     },
     icon: "Bolt",
   },
   {
     label: "Clothing",
-    subCategories: ["T-shirt", "Shirt", "Jeans", "Pants", "Jacket"],
+    subCategories: {
+      Shirt: {
+        label: "Shirt",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+      Pants: {
+        label: "Pants",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+      Shoes: {
+        label: "Shoes",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+      Jacket: {
+        label: "Jacket",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+    },
+    icon: "Checkroom",
   },
   {
     label: "Accessories",
-    subCategories: ["Bag", "Watch", "Jewellery", "Glasses", "Sunglasses"],
+    subCategories: {
+      Watch: {
+        label: "Watch",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+      Belt: {
+        label: "Belt",
+        subCategories: ["Men", "Women", "Kids"],
+        icon: "Checkroom",
+      },
+    },
+    icon: "Category",
   },
 ];
 
 const CatogoryNavBar = () => {
   return (
-    <>
-      <Box sx={{ display: "flex", alignItems: "flex-start", width: "100%" }}>
-        <Category
-          label={Categories[0].label}
-          subCategories={Categories[0].subCategories}
-          icon="Bolt"
-        />
-      </Box>
-    </>
+    (
+      <>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            width: "100%",
+            gap: "2em",
+          }}
+        >
+          {Categories.map((category) => (
+            <Category key={category.label} {...category} />
+          ))}
+        </Box>
+      </>
+    ) || null
   );
 };
 

@@ -1,4 +1,11 @@
-import { Bolt } from "@mui/icons-material";
+import {
+  Bolt,
+  Laptop,
+  Phone,
+  Tablet,
+  Category as CategoryIcon,
+  Checkroom,
+} from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -11,11 +18,16 @@ import { useState } from "react";
 
 const Icons = {
   Bolt,
+  Laptop,
+  Phone,
+  Tablet,
+  Category: CategoryIcon,
+  Checkroom,
 };
 
 interface CategoryProps {
   label: string;
-  subCategories: any[]; // Array of strings or nested subcategory objects
+  subCategories: any[] | {}; // Array of strings or nested subcategory objects
   icon: string;
 }
 
@@ -32,14 +44,13 @@ const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
     setAnchorEl(null);
   };
 
-  const renderSubCategories = (subCategories: string[] | any[]) => {
-    //TODO make it render a new category for every subcategory
-    return <h1>Hello</h1>;
-  };
-
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", position: "relative" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+      }}
     >
       <Button
         startIcon={<Icon />}
@@ -55,8 +66,11 @@ const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
         open={open}
         onClose={handleClose}
       >
-        {subCategories && renderSubCategories(subCategories)}
+        <MenuItem>hi</MenuItem>
       </Menu>
+      <Box
+        sx={{ position: "absolute", top: "100%", left: 0, width: "100%" }}
+      ></Box>
     </Box>
   );
 };
