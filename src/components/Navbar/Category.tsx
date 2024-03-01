@@ -5,6 +5,10 @@ import {
   Tablet,
   Category as CategoryIcon,
   Checkroom,
+  Sports,
+  Toys,
+  Spa,
+  Home,
 } from "@mui/icons-material";
 import {
   Box,
@@ -23,6 +27,10 @@ const Icons = {
   Tablet,
   Category: CategoryIcon,
   Checkroom,
+  Sports,
+  Toys,
+  Spa,
+  Home,
 };
 
 interface CategoryProps {
@@ -32,6 +40,7 @@ interface CategoryProps {
 }
 
 const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
+  const streak = "good";
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const Icon = Icons[icon as keyof typeof Icons];
@@ -43,6 +52,32 @@ const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  function renderSubCategory(subCategories: any) {
+    if (typeof subCategories === "object") {
+      return Object.keys(subCategories).map((key) => {
+        const Icon = Icons[subCategories[key].icon as keyof typeof Icons];
+        return (
+          <MenuItem onClick={handleClose} key={key}>
+            <Icon sx={{ mr: 1.1 }} />
+            {subCategories.subCategories
+              ? renderSubCategory(subCategories.subCategories)
+              : subCategories[key].label}
+          </MenuItem>
+        );
+      });
+    }
+    return subCategories.map((subCategory: string) => {
+      return (
+        <>
+          <Button>
+            <Typography>{subCategory}</Typography>
+          </Button>
+          <Menu></Menu>
+        </>
+      );
+    });
+  }
 
   return (
     <Box
@@ -66,7 +101,7 @@ const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem>hi</MenuItem>
+        {renderSubCategory(subCategories)}
       </Menu>
       <Box
         sx={{ position: "absolute", top: "100%", left: 0, width: "100%" }}
