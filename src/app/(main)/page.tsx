@@ -1,27 +1,28 @@
-import Image from "next/image";
-import Link from "next/link";
-import authOptions from "../api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth";
-import { Box, Typography } from "@mui/material";
-import db from "@/lib/db";
-import Product from "@/components/Product";
-import CatogoryNavBar from "@/components/Navbar/CatogoryNavBar";
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-  const featuredProductElements = await db.product.findMany({
-    where: {
-      featured: true,
-    },
-  });
-
+"use client";
+import { SessionProvider, useSession } from "next-auth/react";
+import { Box } from "@mui/material";
+export default function Home() {
   return (
-    <Box color={"black"} sx={{ padding: "20px" }}>
-      <Typography>{session?.user ? session.user.username : "Guest"}</Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 20 }}>
-        {featuredProductElements.map((product: any) => (
-          <Product key={product.id} data={product} />
-        ))}
-      </Box>
+    <Box>
+      <SessionProvider>
+        <UserName />
+      </SessionProvider>
     </Box>
+  );
+}
+
+function UserName() {
+  const { data: session } = useSession();
+  if (!session) {
+    return (
+      <div>
+        <p className="text-red-500">You are not signed in</p>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <p className="text-green-500">Signed in as {session.user.username}</p>
+    </div>
   );
 }

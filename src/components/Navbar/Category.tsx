@@ -2,20 +2,7 @@ import { Box } from "@mui/material";
 import styles from "./Nav.module.scss";
 import { useEffect, useRef, useState } from "react";
 
-export default function Category({
-  value,
-}: {
-  value: {
-    label: string;
-    subCategories: {
-      [key: string]: {
-        label: string;
-        subCategories: string[];
-        icon: string;
-      };
-    };
-  };
-}) {
+export default function Category({ value }: { value: any }) {
   const { label, subCategories } = value;
   const openState = subCategories
     ? Object.values(subCategories).map((category: any) => category.label)
@@ -96,7 +83,7 @@ export default function Category({
           display: "flex",
           gap: "10px",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-evenly",
         }}
         ref={AnchorElement}
         className={styles.categoryMenu}
@@ -141,6 +128,7 @@ export default function Category({
                     : "0px",
                   width: "100%",
                   paddingLeft: "10px",
+                  justifyContent: "space-between",
                   backgroundColor: "black",
                 }}
               >
