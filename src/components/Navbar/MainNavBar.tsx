@@ -1,11 +1,8 @@
-import Link from "next/link";
-import ButtonSignOut from "./ButtonSignOut";
-import { Typography, Avatar, IconButton, Box, Button } from "@mui/material";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth";
+import { Typography, Box } from "@mui/material";
+import AuthButtons from "./AuthButtons";
+import { Suspense } from "react";
 
-const MainNavbar = async () => {
-  const session = await getServerSession(authOptions);
+const MainNavbar = () => {
   return (
     <Box
       sx={{
@@ -16,53 +13,15 @@ const MainNavbar = async () => {
         justifyContent: "space-between",
       }}
     >
-      <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+      <Typography
+        variant="h5"
+        sx={{ fontWeight: "bold", fontFamily: "monospace" }}
+      >
         Boundless
       </Typography>
-      <Box>
-        {session?.user ? (
-          <>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              color="inherit"
-              sx={{ mr: 2 }}
-            >
-              <Avatar
-                sx={{
-                  bgcolor: "primary.main",
-                  height: "60px",
-                  width: "60px",
-                }}
-                alt="Avatar"
-                src="/avatarTest.jpg"
-              />
-            </IconButton>
-            <ButtonSignOut />
-          </>
-        ) : (
-          <Box sx={{ display: "flex", gap: "10px" }}>
-            <Link href="/sign-up">
-              <Button
-                color="secondary"
-                variant="outlined"
-                sx={{ background: "secondary.main", fontWeight: "600" }}
-              >
-                Sign Up
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button
-                color="secondary"
-                sx={{ fontWeight: "600" }}
-                variant="outlined"
-              >
-                Login
-              </Button>
-            </Link>
-          </Box>
-        )}
-      </Box>
+      <Suspense fallback={<div>Loading...</div>}>
+        <AuthButtons />
+      </Suspense>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { AppBar } from "@mui/material";
+import { AppBar, Box } from "@mui/material";
 import CatogoryNavBar from "./CatogoryNavBar";
 import MainNavbar from "./MainNavbar";
 import Theme from "@/components/Theme";

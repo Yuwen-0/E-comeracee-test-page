@@ -162,25 +162,23 @@ const Categories = [
 
 const CatogoryNavBar = () => {
   return (
-    (
-      <>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-            justifyContent: "space-between",
-            gap: "10px",
-            zIndex: 30,
-          }}
-        >
-          {Categories.map((category) => (
-            <Category key={category.label} {...category} />
-          ))}
-        </Box>
-      </>
-    ) || null
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          justifyContent: "space-between",
+          gap: "10px",
+          zIndex: 30,
+        }}
+      >
+        {Categories.map((category, index) => (
+          <Category key={index} value={category} />
+        ))}
+      </Box>
+    </>
   );
 };
 
