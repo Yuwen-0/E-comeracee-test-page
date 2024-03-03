@@ -168,9 +168,11 @@ const CatogoryNavBar = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-evenly",
             width: "100%",
-            gap: "2em",
+            height: "100%",
+            justifyContent: "space-between",
+            gap: "10px",
+            zIndex: 30,
           }}
         >
           {Categories.map((category) => (

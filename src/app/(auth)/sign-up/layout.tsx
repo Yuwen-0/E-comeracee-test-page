@@ -1,6 +1,4 @@
 import { Box } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { themeOptions } from "@/lib/theme";
 
 export default function SignUpLayout({
   children,
@@ -16,7 +14,7 @@ export default function SignUpLayout({
           height: "100vh",
           justifyContent: "center",
           alignItems: "center",
-          background: "#88d8ec",
+          background: "#78A1BB",
         }}
       >
         {children}

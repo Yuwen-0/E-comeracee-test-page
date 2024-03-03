@@ -1,113 +1,70 @@
-import {
-  Bolt,
-  Laptop,
-  Phone,
-  Tablet,
-  Category as CategoryIcon,
-  Checkroom,
-  Sports,
-  Toys,
-  Spa,
-  Home,
-} from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
+import styles from "./Nav.module.scss";
+import { useRef } from "react";
 
-const Icons = {
-  Bolt,
-  Laptop,
-  Phone,
-  Tablet,
-  Category: CategoryIcon,
-  Checkroom,
-  Sports,
-  Toys,
-  Spa,
-  Home,
-};
+export default function Category({ label }: any) {
+  const AnchorElement = useRef(null);
+  const Arrow = useRef(null);
 
-interface CategoryProps {
-  label: string;
-  subCategories: any[] | {}; // Array of strings or nested subcategory objects
-  icon: string;
-}
-
-const Category: React.FC<CategoryProps> = ({ label, subCategories, icon }) => {
-  const streak = "good";
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const Icon = Icons[icon as keyof typeof Icons];
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const ShowMenu = () => {
+    if (!AnchorElement.current || !Arrow.current) return;
+    const anchor = AnchorElement.current as HTMLDivElement;
+    const arrow = Arrow.current as HTMLSpanElement;
+    anchor.style.height = "100px";
+    anchor.style.bottom = "-100px";
+    anchor.style.color = "black";
+    arrow.style.transform = "rotate(180deg)";
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const HideMenu = () => {
+    if (!AnchorElement.current || !Arrow.current) return;
+    const anchor = AnchorElement.current as HTMLDivElement;
+    const arrow = Arrow.current as HTMLSpanElement;
+    anchor.style.height = "0px";
+    anchor.style.bottom = "0px";
+    anchor.style.color = "transparent";
+    arrow.style.transform = "rotate(0deg)";
   };
-
-  function renderSubCategory(subCategories: any) {
-    if (typeof subCategories === "object") {
-      return Object.keys(subCategories).map((key) => {
-        const Icon = Icons[subCategories[key].icon as keyof typeof Icons];
-        return (
-          <MenuItem onClick={handleClose} key={key}>
-            <Icon sx={{ mr: 1.1 }} />
-            {subCategories.subCategories
-              ? renderSubCategory(subCategories.subCategories)
-              : subCategories[key].label}
-          </MenuItem>
-        );
-      });
-    }
-    return subCategories.map((subCategory: string) => {
-      return (
-        <>
-          <Button>
-            <Typography>{subCategory}</Typography>
-          </Button>
-          <Menu></Menu>
-        </>
-      );
-    });
-  }
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-      }}
-    >
-      <Button
-        startIcon={<Icon />}
-        size="large"
-        color="inherit"
-        onClick={handleClick}
-      >
-        {label}
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {renderSubCategory(subCategories)}
-      </Menu>
+    <>
       <Box
-        sx={{ position: "absolute", top: "100%", left: 0, width: "100%" }}
-      ></Box>
-    </Box>
+        sx={{
+          textAlign: "center",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0px",
+        }}
+        className={styles.categoryContainer}
+        onMouseEnter={ShowMenu}
+        onMouseLeave={HideMenu}
+      >
+        <p style={{ margin: "0", padding: "0" }}>{label}</p>
+        <span
+          style={{
+            transition: "all 0.3s ease-in-out",
+          }}
+          ref={Arrow}
+        >
+          ▼
+        </span>
+        <Box
+          sx={{
+            fontweight: "bold",
+            backgroundColor: "primary.main",
+            border: "1px solid black",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          ref={AnchorElement}
+          className={styles.categoryMenu}
+        >
+          {label}
+        </Box>
+      </Box>
+    </>
   );
-};
-
-export default Category;
+}

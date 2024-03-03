@@ -5,22 +5,18 @@ import {
   Button,
   IconButton,
   Typography,
-  Link as MLink,
   CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { themeOptions } from "@/lib/theme";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
-import { LoginUser } from "@/lib/auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
+
 export default function Login() {
   const router = useRouter();
-  const theme = createTheme(themeOptions);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -143,137 +139,141 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          width: "400px",
-          padding: "20px 30px",
-          height: "520px",
-          backgroundColor: "whitesmoke",
-          borderRadius: "10px",
-          border: "1px solid gray",
-          color: "black",
-          position: "relative",
-        }}
+    <Box
+      sx={{
+        width: "400px",
+        padding: "20px 30px",
+        height: "520px",
+        backgroundColor: "whitesmoke",
+        borderRadius: "10px",
+        border: "1px solid gray",
+        color: "black",
+        position: "relative",
+      }}
+    >
+      {loading && (
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            top: "0",
+            left: "0",
+            backgroundColor: "rgba(0, 0, 0, 0.507)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+          }}
+        >
+          <CircularProgress size={70} sx={{ color: "white" }} />
+        </Box>
+      )}
+      <Typography
+        variant="h4"
+        sx={{ marginBottom: "12px", textAlign: "center" }}
+        color="secondary"
       >
-        {loading && (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              top: "0",
-              left: "0",
-              backgroundColor: "rgba(0, 0, 0, 0.507)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              position: "absolute",
+        Login
+      </Typography>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            marginBottom: "15px",
+          }}
+        >
+          <TextField
+            color="secondary"
+            disabled={loading}
+            value={formData.username}
+            onChange={(e) => validateInput("username", e.target.value)}
+            type="text"
+            id="username"
+            label="Username*"
+            variant="outlined"
+            error={error.username.error}
+            helperText={
+              <span style={{ position: "absolute" }}>
+                {error.username.message}
+              </span>
+            }
+          />
+          <TextField
+            color="secondary"
+            disabled={loading}
+            value={formData.password}
+            onChange={(e) => validateInput("password", e.target.value)}
+            type={formData.showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  disabled={loading}
+                  onClick={handleTogglePasswordVisibility}
+                  edge="end"
+                >
+                  {formData.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              ),
             }}
-          >
-            <CircularProgress size={70} sx={{ color: "white" }} />
-          </Box>
-        )}
-        <Typography
-          variant="h4"
-          sx={{ marginBottom: "12px", textAlign: "center" }}
-          color={"primary"}
+            id="password"
+            label="Password*"
+            variant="outlined"
+            error={error.password.error}
+            helperText={
+              <span style={{ position: "absolute" }}>
+                {error.password.message}
+              </span>
+            }
+          />
+        </Box>
+        <Button
+          disabled={loading}
+          sx={{ height: "40px" }}
+          type="submit"
+          color="secondary"
+          variant="outlined"
         >
           Login
+        </Button>
+        <Box sx={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
+          <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
+          <Typography variant="body1" sx={{ margin: "0 20px" }}>
+            OR
+          </Typography>
+          <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
+        </Box>
+        <Button
+          disabled={loading}
+          sx={{
+            height: "40px",
+          }}
+          color="secondary"
+          type="submit"
+          variant="outlined"
+        >
+          Login With Google
+        </Button>
+        <Typography variant="body1" sx={{ textAlign: "center" }}>
+          if you don&apos;t have an account{" "}
+          <Link
+            style={{ color: "#334266" }}
+            className="hover:underline"
+            href={loading ? "#" : "/sign-up"}
+          >
+            {" "}
+            Sign Up
+          </Link>
         </Typography>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "30px",
-              marginBottom: "15px",
-            }}
-          >
-            <TextField
-              disabled={loading}
-              value={formData.username}
-              onChange={(e) => validateInput("username", e.target.value)}
-              type="text"
-              id="username"
-              label="Username*"
-              variant="outlined"
-              error={error.username.error}
-              helperText={
-                <span style={{ position: "absolute" }}>
-                  {error.username.message}
-                </span>
-              }
-            />
-            <TextField
-              disabled={loading}
-              value={formData.password}
-              onChange={(e) => validateInput("password", e.target.value)}
-              type={formData.showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    disabled={loading}
-                    onClick={handleTogglePasswordVisibility}
-                    edge="end"
-                  >
-                    {formData.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                ),
-              }}
-              id="password"
-              label="Password*"
-              variant="outlined"
-              error={error.password.error}
-              helperText={
-                <span style={{ position: "absolute" }}>
-                  {error.password.message}
-                </span>
-              }
-            />
-          </Box>
-          <Button
-            disabled={loading}
-            sx={{ height: "40px" }}
-            type="submit"
-            variant="outlined"
-          >
-            Login
-          </Button>
-          <Box sx={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
-            <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
-            <Typography variant="body1" sx={{ margin: "0 20px" }}>
-              OR
-            </Typography>
-            <hr style={{ flex: 1, borderColor: "black", height: "1px" }} />
-          </Box>
-          <Button
-            disabled={loading}
-            sx={{ height: "40px" }}
-            type="submit"
-            variant="outlined"
-          >
-            Login With Google
-          </Button>
-          <Typography variant="body1" sx={{ textAlign: "center" }}>
-            if you don&apos;t have an account{" "}
-            <Link
-              style={{ color: "#1990bf" }}
-              className="hover:underline"
-              href={loading ? "#" : "/sign-up"}
-            >
-              {" "}
-              Sign Up
-            </Link>
-          </Typography>
-          <Typography
-            variant="body1"
-            color={error.main.error ? "error" : "green"}
-            sx={{ textAlign: "center" }}
-          >
-            {error.main.message}
-          </Typography>
-        </form>
-      </Box>
-    </ThemeProvider>
+        <Typography
+          variant="body1"
+          color={error.main.error ? "error" : "green"}
+          sx={{ textAlign: "center" }}
+        >
+          {error.main.message}
+        </Typography>
+      </form>
+    </Box>
   );
 }

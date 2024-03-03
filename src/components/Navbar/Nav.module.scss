@@ -1,0 +1,25 @@
+.categoryContainer{
+    width: 100%;
+    display: flex;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.233) !important;
+    }
+    position: relative;
+    z-index: 2;
+}
+
+.categoryMenu{
+    position: absolute;
+    bottom:0;
+    display: flex !important;
+    width: 100%;
+    height: 0;
+    color: transparent ;
+    transition: all 0.2s ease-in-out;
+    z-index: 0;
+    border-radius: 0 0 5px 5px;
+}

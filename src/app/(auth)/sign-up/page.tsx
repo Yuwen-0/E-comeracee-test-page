@@ -220,7 +220,7 @@ export default function SignUp() {
         <Typography
           variant="h4"
           sx={{ marginBottom: "12px", textAlign: "center" }}
-          color={"primary"}
+          color={"secondary"}
         >
           Sign Up
         </Typography>
@@ -234,6 +234,7 @@ export default function SignUp() {
             }}
           >
             <TextField
+              color="secondary"
               value={formData.email}
               onChange={(e) => validateInput("email", e.target.value)}
               type="email"
@@ -250,6 +251,7 @@ export default function SignUp() {
               autoComplete="on"
             />
             <TextField
+              color="secondary"
               value={formData.username}
               onChange={(e) => validateInput("username", e.target.value)}
               type="text"
@@ -265,6 +267,7 @@ export default function SignUp() {
               }
             />
             <TextField
+              color="secondary"
               value={formData.password}
               onChange={(e) => validateInput("password", e.target.value)}
               type={formData.showPassword ? "text" : "password"}
@@ -296,6 +299,7 @@ export default function SignUp() {
             control={
               <Checkbox
                 checked={formData.terms}
+                color="secondary"
                 disabled={loading}
                 onChange={(e) => validateInput("terms", e.target.checked)}
               />
@@ -307,7 +311,7 @@ export default function SignUp() {
                   href="https://www.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  color={error.terms.error ? "error" : "primary"}
+                  color={error.terms.error ? "error" : "secondary"}
                 >
                   terms and conditions
                 </MLink>
@@ -320,6 +324,7 @@ export default function SignUp() {
               sx={{ width: "100%" }}
               type="submit"
               variant="outlined"
+              color="secondary"
             >
               SignUp
             </Button>
@@ -353,6 +358,7 @@ export default function SignUp() {
               sx={{ width: "100%" }}
               type="submit"
               variant="outlined"
+              color="secondary"
             >
               SignUp with Google
             </Button>
@@ -361,7 +367,9 @@ export default function SignUp() {
               sx={{ textAlign: "center", marginTop: "20px" }}
             >
               if you already have an account{" "}
-              <MLink href={loading ? "#" : "/login"}>Login</MLink>
+              <MLink color="secondary" href={loading ? "#" : "/login"}>
+                Login
+              </MLink>
             </Typography>
           </Box>
         </form>
