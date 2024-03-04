@@ -1,6 +1,10 @@
 "use client";
 import { SessionProvider, useSession } from "next-auth/react";
-import { Box } from "@mui/material";
+import { Box, Typography, Link as Mlink, Button } from "@mui/material";
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
+import SubCategory from "@/components/Navbar/SubCategory";
+import { useRef, useState } from "react";
+import Link from "next/link";
 export default function Home() {
   return (
     <Box>

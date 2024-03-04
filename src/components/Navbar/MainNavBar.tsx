@@ -1,6 +1,7 @@
+"use client";
 import { Typography, Box } from "@mui/material";
 import AuthButtons from "./AuthButtons";
-import { Suspense } from "react";
+import { SessionProvider } from "next-auth/react";
 
 const MainNavbar = () => {
   return (
@@ -19,9 +20,9 @@ const MainNavbar = () => {
       >
         Boundless
       </Typography>
-      <Suspense fallback={<div>Loading...</div>}>
+      <SessionProvider>
         <AuthButtons />
-      </Suspense>
+      </SessionProvider>
     </Box>
   );
 };
