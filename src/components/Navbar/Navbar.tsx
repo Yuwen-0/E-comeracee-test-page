@@ -9,7 +9,7 @@ export default async function Navbar() {
       <Theme>
         <AppBar
           sx={{
-            height: "120px",
+            height: "125px",
             display: "flex",
             alignItems: "center",
             flexDirection: "coulmn",

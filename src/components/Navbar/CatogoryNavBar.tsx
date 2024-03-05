@@ -171,7 +171,6 @@ const CatogoryNavBar = () => {
           height: "100%",
           justifyContent: "space-between",
           gap: "10px",
-          zIndex: 30,
         }}
       >
         {Categories.map((category, index) => (
