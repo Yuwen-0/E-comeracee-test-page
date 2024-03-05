@@ -55,7 +55,7 @@ export default function Category({ value }: { value: any }) {
     anchor.style.height = "0px";
     anchor.style.bottom = "0px";
     anchor.style.opacity = "0";
-    arrow.style.transform = "rotate(1deg)";
+    arrow.style.transform = "rotate(0deg)";
   };
 
   return (
