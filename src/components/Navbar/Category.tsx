@@ -37,8 +37,8 @@ export default function Category({ value }: { value: any }) {
     const arrow = Arrow.current as HTMLSpanElement;
     anchor.style.display = "flex";
     anchor.style.pointerEvents = "auto";
-    anchor.style.height = height + openSubCatCount * 30 + "px";
-    anchor.style.bottom = `-${bottom + openSubCatCount * 10}px`;
+    anchor.style.height = `${height}px`;
+    anchor.style.top = "50.5px";
     anchor.style.opacity = "1";
     arrow.style.transform = "rotate(180deg)";
   };
@@ -55,7 +55,7 @@ export default function Category({ value }: { value: any }) {
     anchor.style.height = "0px";
     anchor.style.bottom = "0px";
     anchor.style.opacity = "0";
-    arrow.style.transform = "rotate(0deg)";
+    arrow.style.transform = "rotate(1deg)";
   };
 
   return (
