@@ -19,7 +19,13 @@ export default async function Navbar() {
           position="static"
         >
           <MainNavbar />
-          <hr style={{ width: "100vw", margin: "10px 0 2px 0" }} />
+          <hr
+            style={{
+              borderColor: "#283044",
+              width: "100vw",
+              margin: "10px 0 2px 0",
+            }}
+          />
           <CatogoryNavBar />
         </AppBar>
       </Theme>
