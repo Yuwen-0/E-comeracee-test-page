@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
-import styles from "./Nav.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import SubCategory from "./SubCategory";
 
 export default function Category({ value }: { value: any }) {
@@ -39,16 +38,22 @@ export default function Category({ value }: { value: any }) {
 
   return (
     <Box
-      key={label}
       sx={{
         textAlign: "center",
+        justifyContent: "center",
         width: "100%",
         height: "100%",
         display: "flex",
-        flexDirection: "column",
-        gap: "0px",
+        gap: "10px",
+        alignItems: "center",
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.233)",
+        },
+        position: "relative",
+        zIndex: 2,
+        borderBottom: "2px solid black",
       }}
-      className={styles.categoryContainer}
       onMouseEnter={showMenu}
       onMouseLeave={hideMenu}
     >
@@ -63,23 +68,30 @@ export default function Category({ value }: { value: any }) {
       </span>
       <Box
         sx={{
-          fontweight: "bold",
+          fontWeight: "bold",
           backgroundColor: "primary.main",
           flexDirection: "column",
           justifyContent: "space-evenly",
           boxShadow: "20px 20px 20px 0 rgba(0, 0, 0, 0.2)",
+          position: "absolute",
+          bottom: "0",
+          opacity: "0",
+          width: "100%",
+          height: "0",
+          pointerEvents: "none",
+          transition: "all 0.2s ease-in-out, color 0.1s ease-in-out",
+          borderRadius: "0 0 5px 5px",
         }}
         ref={anchorElementRef}
-        className={styles.categoryMenu}
       >
         {subCategories &&
           Object.values(subCategories).map((subCategory: any, index) => (
-            <>
+            <Box key={subCategory.label} sx={{ width: "100%", height: "100%" }}>
               <SubCategory label={subCategory.label} />
               {index < subCategoryLabels.length - 1 && (
                 <hr style={{ borderColor: "black" }} />
               )}
-            </>
+            </Box>
           ))}
       </Box>
     </Box>

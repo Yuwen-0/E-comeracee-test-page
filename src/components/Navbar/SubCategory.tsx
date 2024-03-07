@@ -32,7 +32,7 @@ const SubCategory = ({ label }: { label: string }) => {
         gap: "10px",
       }}
     >
-      <Link href={`/filter/${label}`}>
+      <Link href={`/filter?category=${label}`}>
         <p style={{ margin: "0", padding: "0" }}>{label}</p>
       </Link>
     </Box>
