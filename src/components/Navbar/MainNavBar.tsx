@@ -2,6 +2,7 @@
 import { Typography, Box } from "@mui/material";
 import AuthButtons from "./AuthButtons";
 import { SessionProvider } from "next-auth/react";
+import SearchBar from "../SearchBar";
 
 const MainNavbar = () => {
   return (
@@ -20,6 +21,9 @@ const MainNavbar = () => {
       >
         Boundless
       </Typography>
+
+      <SearchBar />
+
       <SessionProvider>
         <AuthButtons />
       </SessionProvider>

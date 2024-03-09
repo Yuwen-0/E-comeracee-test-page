@@ -14,7 +14,7 @@ const SearchBar: NextPage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/search/${formData.search}`);
+    router.push(`/search?name=${formData.search},category=*`);
   };
 
   return (
@@ -23,7 +23,9 @@ const SearchBar: NextPage = () => {
         <Input
           sx={{ width: "300px" }}
           placeholder="Search..."
-          startAdornment={<Search color="secondary" />}
+          endAdornment={
+            <Search sx={{ pointerEvents: "none" }} color="secondary" />
+          }
           inputProps={{ "aria-label": "search" }}
           color="secondary"
           value={formData.search}

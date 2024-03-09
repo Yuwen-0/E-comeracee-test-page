@@ -13,10 +13,15 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get("type") ?? "";
+    const category = searchParams.get('category')|| "*";
+    const name = searchParams.get('name') || "";
+    console.log(category, name);
     const products = await db.product.findMany({
         where: {
-            name: type,
+            category: category,
+            name: {
+                contains: name,
+            },
         },
     });
     return NextResponse.json({ products });

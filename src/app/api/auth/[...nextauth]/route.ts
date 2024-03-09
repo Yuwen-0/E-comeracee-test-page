@@ -1,6 +1,5 @@
 import  authOptions  from "./options"
-import type { NextApiRequest, NextApiResponse } from "next"
-import NextAuth, { AuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 
 const handler = NextAuth(authOptions)
 

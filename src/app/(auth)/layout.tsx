@@ -1,6 +1,4 @@
 import { Box } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { themeOptions } from "@/lib/theme";
 import Theme from "@/components/Theme";
 
 export default function LoginLayout({

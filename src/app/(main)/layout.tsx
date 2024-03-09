@@ -2,12 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Balsamiq_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import { ThemeProvider } from "@mui/material";
-import { themeOptions } from "@/lib/theme";
-import { createTheme } from "@mui/material";
-
-const inter = Inter({ subsets: ["latin"] });
-
 const balsamiq = Balsamiq_Sans({
   subsets: ["latin"],
   weight: "700",
