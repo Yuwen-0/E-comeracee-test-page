@@ -20,7 +20,7 @@ const SubCategory = ({ label }: { label: string }) => {
   };
 
   return (
-    <Link href={`/search?category=${label}`}>
+    <Link href={`/search?category=${label}&name=`}>
       <Box
         ref={subCatRef}
         onMouseEnter={handleMouseEnter}

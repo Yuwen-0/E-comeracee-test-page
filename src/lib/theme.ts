@@ -5,10 +5,12 @@ export const themeOptions: ThemeOptions = {
     mode: 'light',
     primary: {
       main: '#78A1BB',
-      dark: "#283044"
+      dark: "#283044",
+      light: '#BCE0F5',
     },
     secondary: {
       main: '#334266',
+      light: '#839BB8',
     },
   },
 };

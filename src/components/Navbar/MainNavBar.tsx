@@ -4,15 +4,31 @@ import AuthButtons from "./AuthButtons";
 import { SessionProvider } from "next-auth/react";
 import SearchBar from "../SearchBar";
 
-const MainNavbar = () => {
+const MainNavbar = ({
+  width = undefined,
+  height = undefined,
+  backgroundColor = undefined,
+  padding = undefined,
+  boxShadow = undefined,
+}: {
+  width: number | string | undefined;
+  height: number | string | undefined;
+  backgroundColor: string | undefined;
+  padding: number | string | undefined;
+  boxShadow: string | undefined;
+}) => {
   return (
     <Box
       sx={{
         display: "flex",
         gap: "10px",
         alignItems: "center",
-        width: "100%",
+        backgroundColor: backgroundColor || "",
+        height: height || "80px",
+        width: width || "100%",
+        padding: padding || "",
         justifyContent: "space-between",
+        boxShadow: boxShadow || "0px 0px 0px 0px #000000",
       }}
     >
       <Typography

@@ -15,12 +15,11 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category')|| "*";
     const name = searchParams.get('name') || "";
-    console.log(category, name);
     const products = await db.product.findMany({
         where: {
             category: category,
             name: {
-                contains: name,
+                contains: name || " ",
             },
         },
     });

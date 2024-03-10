@@ -21,6 +21,10 @@ const Categories = [
         subCategories: ["Apple", "Samsung", "Xiaomi", "Realme", "OnePlus"],
         icon: "Tablet",
       },
+      Headphone: {
+        label: "Headphone",
+        subCategories: ["JBL", "Sony", "Beats", "Bose", "Razer"],
+      },
     },
     icon: "Bolt",
   },
