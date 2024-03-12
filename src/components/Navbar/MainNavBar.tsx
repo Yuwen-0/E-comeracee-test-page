@@ -5,21 +5,21 @@ import { SessionProvider } from "next-auth/react";
 import SearchBar from "../SearchBar";
 
 const MainNavbar = ({
-  width = undefined,
-  height = undefined,
-  backgroundColor = undefined,
-  padding = undefined,
-  boxShadow = undefined,
+  width,
+  height,
+  backgroundColor,
+  padding,
+  boxShadow,
   border,
   searchText,
 }: {
-  width: number | string | undefined;
-  height: number | string | undefined;
-  backgroundColor: string | undefined;
-  padding: number | string | undefined;
-  boxShadow: string | undefined;
-  border: boolean;
-  searchText: string | null | undefined;
+  width?: number | string;
+  height?: number | string | null;
+  backgroundColor?: string | null;
+  padding?: number | string | null;
+  boxShadow?: string | null;
+  border?: boolean | null;
+  searchText?: string | null | null;
 }) => {
   return (
     <Box

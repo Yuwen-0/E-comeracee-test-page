@@ -19,13 +19,13 @@ const Filter = () => {
   return (
     <Box
       sx={{
-        height: "calc(100vh - 130px)", // Adjusted height to account for navbar
-        width: "100%",
+        height: "calc(100vh - 60px)", // Adjusted height to account for navbar
         overflowY: "auto", // Added for child content scrolling
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         gap: "30px",
         padding: "10px",
+        flexWrap: "wrap",
       }}
     >
       {content ? (

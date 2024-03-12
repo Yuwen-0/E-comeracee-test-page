@@ -18,7 +18,15 @@ export default async function Navbar() {
           }}
           position="static"
         >
-          <MainNavbar width={"100%"} />
+          <MainNavbar
+            width={"100%"}
+            height={null}
+            backgroundColor={null}
+            padding={null}
+            boxShadow={null}
+            border={null}
+            searchText={null}
+          />
           <hr
             style={{
               borderColor: "#283044",
