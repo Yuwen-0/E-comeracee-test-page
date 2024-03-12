@@ -10,25 +10,29 @@ const MainNavbar = ({
   backgroundColor = undefined,
   padding = undefined,
   boxShadow = undefined,
+  border,
+  searchText,
 }: {
   width: number | string | undefined;
   height: number | string | undefined;
   backgroundColor: string | undefined;
   padding: number | string | undefined;
   boxShadow: string | undefined;
+  border: boolean;
+  searchText: string | null | undefined;
 }) => {
   return (
     <Box
       sx={{
         display: "flex",
-        gap: "10px",
         alignItems: "center",
         backgroundColor: backgroundColor || "",
         height: height || "80px",
-        width: width || "100%",
-        padding: padding || "",
+        width: width == "100%" ? "100%" : width || null,
+        paddingInline: padding || "",
         justifyContent: "space-between",
         boxShadow: boxShadow || "0px 0px 0px 0px #000000",
+        borderBottom: border ? "1px solid black" : "none",
       }}
     >
       <Typography
@@ -38,7 +42,7 @@ const MainNavbar = ({
         Boundless
       </Typography>
 
-      <SearchBar />
+      <SearchBar searchText={searchText || ""} />
 
       <SessionProvider>
         <AuthButtons />

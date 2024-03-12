@@ -9,7 +9,14 @@ const AuthButtons = () => {
     <>
       {session?.user ? (
         <>
-          <Box>
+          <Box
+            width={180}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
               size="small"
               aria-label="account of current user"

@@ -4,8 +4,8 @@ import { FormControl, Input } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
-const SearchBar: NextPage = () => {
-  const [formData, setFormData] = useState({ search: "" });
+const SearchBar = ({ searchText }: { searchText: string }) => {
+  const [formData, setFormData] = useState({ search: searchText });
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +14,7 @@ const SearchBar: NextPage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/search?name=${formData.search},category=*`);
+    router.push(`/search?name=${formData.search}&category=`);
   };
 
   return (

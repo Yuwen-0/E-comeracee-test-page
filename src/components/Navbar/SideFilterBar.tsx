@@ -14,6 +14,7 @@ const SideFilterBar = ({
         height,
         backgroundColor: "primary.light",
         textAlign: "center",
+        borderRight: "1px solid black",
       }}
     >
       <h1>Side Filter Bar</h1>

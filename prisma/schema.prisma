@@ -41,7 +41,7 @@ model Product {
   material         String
   features         String
   technicalSpecs   String?
-  images           String[]
+  image            String
   videoUrl         String?
   availability     String
   ratings          Decimal?

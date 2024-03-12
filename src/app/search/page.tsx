@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { filterBy } from "@/lib/products";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import Product from "@/components/Product";
 
 const Filter = () => {
   const params = useSearchParams();
@@ -18,23 +19,18 @@ const Filter = () => {
   return (
     <Box
       sx={{
-        height: "calc(100vh - 70px - 40px)", // Adjusted height to account for navbar
-        width: "fit-content",
+        height: "calc(100vh - 130px)", // Adjusted height to account for navbar
+        width: "100%",
         overflowY: "auto", // Added for child content scrolling
         display: "flex",
         flexDirection: "column",
         gap: "30px",
+        padding: "10px",
       }}
     >
       {content ? (
         (content as any[]).map((content) => {
-          return Object.keys(content).map((value, index, array) => {
-            return (
-              <p key={value as string}>
-                {value}: {content[value as keyof typeof content]}
-              </p>
-            );
-          });
+          return <Product key={content.id} content={content} />;
         })
       ) : (
         <p>Loading...</p>
