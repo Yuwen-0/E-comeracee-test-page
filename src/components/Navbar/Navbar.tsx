@@ -13,12 +13,12 @@ export default async function Navbar() {
             display: "flex",
             alignItems: "center",
             flexDirection: "coulmn",
-            padding: "20px 20px 0 20px",
+            padding: "15px 10px 0 10px",
             justifyContent: "space-between",
           }}
           position="static"
         >
-          <MainNavbar  width={"100%"} />
+          <MainNavbar width={"100%"} />
           <hr
             style={{
               borderColor: "#283044",
