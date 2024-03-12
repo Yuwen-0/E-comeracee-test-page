@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { NextPage } from "next";
-import { FormControl, Input } from "@mui/material";
+import { FormControl, IconButton, Input } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 
 const SearchBar = ({ searchText }: { searchText: string }) => {
   const [formData, setFormData] = useState({ search: searchText });
@@ -23,8 +24,20 @@ const SearchBar = ({ searchText }: { searchText: string }) => {
         <Input
           sx={{ width: "300px" }}
           placeholder="Search..."
+          startAdornment={
+            <Search sx={{ pointerEvents: "none", marginRight: "5px" }} />
+          }
           endAdornment={
-            <Search sx={{ pointerEvents: "none" }} color="secondary" />
+            <>
+              {formData.search && (
+                <IconButton
+                  sx={{ padding: 0 }}
+                  onClick={() => setFormData({ ...formData, search: "" })}
+                >
+                  <CloseSharpIcon />
+                </IconButton>
+              )}
+            </>
           }
           inputProps={{ "aria-label": "search" }}
           color="secondary"
