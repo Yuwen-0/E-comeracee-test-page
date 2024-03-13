@@ -45,17 +45,9 @@ export async function GET(request: Request) {
     const products = await db.product.findMany({
       where: {
         // Combine WHERE clauses using AND operator (optional)
-        AND: whereClause, // Replace with appropriate operator(s) if needed
+        AND: whereClause as any, // Replace with appropriate operator(s) if needed
       },
     });
   
     return NextResponse.json({ products });
   }
-  
-export async function DELETE(request: Request) {
-    const productsData = await request.json();
-    const products = await db.product.createMany({
-        data: productsData,
-    });
-    return NextResponse.json({ products });
-}

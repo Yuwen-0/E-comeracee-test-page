@@ -1,21 +1,26 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { NextPage } from "next";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FormControl, IconButton, Input } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
+import { useDispatch, useSelector } from "react-redux";
+import { setValue, clearValue } from "@/store/search";
 
 const SearchBar = ({ searchText }: { searchText: string }) => {
-  const [formData, setFormData] = useState({ search: searchText });
+  const search = useSelector((state: any) => state.search.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setValue(searchText));
+  }, [dispatch, searchText]);
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, search: e.target.value });
+    dispatch(setValue(e.target.value));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/search?name=${formData.search}&category=`);
+    router.push(`/search?name=${search}&category=`);
   };
 
   return (
@@ -29,10 +34,12 @@ const SearchBar = ({ searchText }: { searchText: string }) => {
           }
           endAdornment={
             <>
-              {formData.search && (
+              {search && (
                 <IconButton
                   sx={{ padding: 0 }}
-                  onClick={() => setFormData({ ...formData, search: "" })}
+                  onClick={() => {
+                    dispatch(clearValue());
+                  }}
                 >
                   <CloseSharpIcon />
                 </IconButton>
@@ -41,7 +48,7 @@ const SearchBar = ({ searchText }: { searchText: string }) => {
           }
           inputProps={{ "aria-label": "search" }}
           color="secondary"
-          value={formData.search}
+          value={search}
           onChange={handleChange}
         />
       </FormControl>

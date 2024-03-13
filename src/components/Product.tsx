@@ -3,12 +3,24 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { formatNumber } from "@/lib/utulities";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function Product({ content }: any) {
+export default function Product({ content, search }: any) {
   const router = useRouter();
   const price = content.price.split(".");
+  const [name, setName] = useState(content.name);
   const IntPrice = formatNumber(price[0]);
   const decimals = price[1];
+
+  useEffect(() => {
+    setName(
+      content.name.replace(
+        new RegExp(search, "gi"),
+        (match: string) => `<strong>${match}</strong>`
+      )
+    );
+  }, [content.name, search]);
+
   return (
     <Box
       sx={{
@@ -45,7 +57,7 @@ export default function Product({ content }: any) {
           padding: "10px",
         }}
       >
-        <Typography>{content.name}</Typography>
+        <Typography dangerouslySetInnerHTML={{ __html: name }} />
         <Typography>
           <span style={{ fontWeight: "bold" }}>$</span>
           <strong>{IntPrice}</strong>
