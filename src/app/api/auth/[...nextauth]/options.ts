@@ -39,7 +39,8 @@ const authOptions: NextAuthOptions = {
             return  {
                 id: existingCustomer.id,
                 username: existingCustomer.username,
-                email: existingCustomer.email
+                email: existingCustomer.email,
+                avatar: existingCustomer.avatar
             }
         }
         })
@@ -50,7 +51,8 @@ const authOptions: NextAuthOptions = {
                 return{
                     id: user.id,
                     email: user.email,
-                    username: user.username
+                    username: user.username,
+                    avatar: user.avatar
                 }
             }
             return token;
@@ -61,7 +63,8 @@ const authOptions: NextAuthOptions = {
                 user: {
                     id: token.id,
                     email: token.email,
-                    username: token.username
+                    username: token.username,
+                    avatar: token.avatar
                 }
             }
         }
@@ -69,3 +72,4 @@ const authOptions: NextAuthOptions = {
 };
 
 export default authOptions;
+

@@ -3,9 +3,9 @@ import { useSearchParams } from "next/navigation";
 import { filterBy } from "@/lib/products";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import Product from "@/components/Product";
-import ProductSkeleton from "@/components/ProductSkeleton";
-import { useDispatch, useSelector } from "react-redux";
+import Product from "@/components/Product/Product";
+import ProductSkeleton from "@/components/Product/ProductSkeleton";
+import { useSelector } from "react-redux";
 
 const Filter = () => {
   const search = useSelector((state: any) => state.search.value);

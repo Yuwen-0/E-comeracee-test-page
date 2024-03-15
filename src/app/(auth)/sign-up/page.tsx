@@ -29,6 +29,7 @@ export default function SignUp() {
     password: "",
     showPassword: false,
     terms: false,
+    avatar: "",
   });
   const [error, setError] = useState({
     main: {
