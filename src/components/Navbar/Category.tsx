@@ -5,7 +5,7 @@ import SubCategory from "./SubCategory";
 export default function Category({ value }: { value: any }) {
   const { label, subCategories } = value;
   const subCategoryLabels = Object.values(subCategories || {}).map(
-    (category: any) => category.label
+    (category: any) => category.label,
   );
   const anchorElementRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);

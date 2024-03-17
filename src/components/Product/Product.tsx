@@ -16,8 +16,8 @@ export default function Product({ content, search }: any) {
     setName(
       content.name.replace(
         new RegExp(search, "gi"),
-        (match: string) => `<strong>${match}</strong>`
-      )
+        (match: string) => `<strong>${match}</strong>`,
+      ),
     );
   }, [content.name, search]);
 

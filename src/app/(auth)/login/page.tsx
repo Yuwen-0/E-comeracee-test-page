@@ -14,7 +14,6 @@ import * as z from "zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
