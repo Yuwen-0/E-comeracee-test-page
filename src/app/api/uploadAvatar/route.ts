@@ -2,25 +2,25 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import db from "@/lib/db";
 
-export async function POST(request: Request) {
+export async function POST(request: Request,searchparams:any) {
     const session = await getServerSession();
-    if (!session?.user?.email) {
+    
+    const avatarFile = searchparams;
+    console.log(avatarFile);
+    if (!session?.user) {
         return NextResponse.json({ success: false, error: "User not authenticated" });
     }
-    const avatarFile = await request.formData();
-
-    const file = avatarFile.get("file") as File;
-    if (!file) {
+    if (!avatarFile) {
         return NextResponse.json({ success: false, error: "No file provided" });
     }
-    await db.customer.update({
+    const customer = await db.customer.update({
         where: {
             email: session?.user?.email as string,
         },
         data: {
-            avatar: JSON.stringify(file),
+            avatar: JSON.stringify(avatarFile),
         },
     });
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ file: avatarFile,customer:customer, success: true});
 }
 

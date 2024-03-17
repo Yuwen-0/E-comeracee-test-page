@@ -15,7 +15,6 @@ export default function Home() {
 
 function UserName() {
   const { data: session } = useSession();
-  console.log(session);
   const [selectedFile, setSelectedFile] = useState(null);
   const handleChange = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -25,11 +24,9 @@ function UserName() {
     if (!selectedFile) {
       return;
     }
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-    const response = await fetch("/api/uploadAvatar", {
+    const response = await fetch(`/api/uploadAvatar?file=${selectedFile}`, {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(selectedFile),
     });
     const data = await response.json();
     console.log(data);

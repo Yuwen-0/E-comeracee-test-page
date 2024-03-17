@@ -29,7 +29,6 @@ export default function SignUp() {
     password: "",
     showPassword: false,
     terms: false,
-    avatar: "",
   });
   const [error, setError] = useState({
     main: {
@@ -213,6 +212,7 @@ export default function SignUp() {
               justifyContent: "center",
               alignItems: "center",
               position: "absolute",
+              zIndex: 1000,
             }}
           >
             <CircularProgress size={70} sx={{ color: "white" }} />
