@@ -1,21 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const searchSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState: {
-    value: ""
+    value: "",
   },
   reducers: {
     setValue: (state, action) => {
-      state.value = action.payload
+      state.value = action.payload;
     },
     clearValue: (state) => {
-      state.value = ""
-    }
-  }
-})
+      state.value = "";
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { setValue, clearValue} = searchSlice.actions
+export const { setValue, clearValue } = searchSlice.actions;
 
-export default searchSlice.reducer
+export default searchSlice.reducer;

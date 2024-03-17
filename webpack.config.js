@@ -1,16 +1,16 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   output: {
-    filename: 'my-first-webpack.bundle.js',
+    filename: "my-first-webpack.bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
-  }
+  },
 };

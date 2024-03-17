@@ -80,7 +80,7 @@ export default function SignUp() {
     async function handleValidation(key: string, value: string) {
       const trimmedValue = value.toString().trim();
       const userExists = await validateUser(trimmedValue, key).then(
-        (res) => res.customerExists
+        (res) => res.customerExists,
       );
 
       if (userExists) {
