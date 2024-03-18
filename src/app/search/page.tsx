@@ -5,24 +5,31 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import Product from "@/components/Product/Product";
 import ProductSkeleton from "@/components/Product/ProductSkeleton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchContent } from "@/store/search";
 
 const Filter = () => {
-  const search = useSelector((state: any) => state.search.value);
+  const search = useSelector((store: any) => store.search.value);
+  const content = useSelector((store: any) => store.search.searchContent);
+  const dispatch = useDispatch();
   const params = useSearchParams();
   const category = params.get("category");
   const name = params.get("name");
-  const [content, setContent] = useState();
   useEffect(() => {
-    async function getContent() {
-      setContent(await filterBy(category, name).then((res) => res.products));
-    }
+    const getContent = async () => {
+      dispatch(
+        setSearchContent(
+          await filterBy(category, name).then((content) => content.products),
+        ),
+      );
+    };
     getContent();
   }, [category, name]);
+
   return (
     <Box
       sx={{
-        height: "100%", // Adjusted height to account for navbar
+        height: "calc(100% - 70px)", // Adjusted height to account for navbar
         overflowY: "auto", // Added for child content scrolling
         display: "flex",
         flexDirection: "row",
@@ -31,12 +38,13 @@ const Filter = () => {
         flexWrap: "wrap",
       }}
     >
-      {content ? (
-        (content as any[]).map((content) => {
+      {content && Array.isArray(content) ? (
+        content.map((content) => {
           return <Product key={content.id} content={content} search={search} />;
         })
       ) : (
         <>
+          {console.log(content)}
           <ProductSkeleton />
           <ProductSkeleton />
           <ProductSkeleton />
