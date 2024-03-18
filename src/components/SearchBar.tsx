@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { useDispatch, useSelector } from "react-redux";
 import { setValue, clearValue } from "@/store/search";
+import Select from "@mui/material";
 
 const SearchBar = ({ searchText }: { searchText: string }) => {
   const search = useSelector((state: any) => state.search.value);

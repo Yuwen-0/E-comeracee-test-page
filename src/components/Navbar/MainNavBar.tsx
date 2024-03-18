@@ -38,8 +38,11 @@ const MainNavbar = ({
         borderBottom: border ? "1px solid black" : "none",
       }}
     >
-      <Button onClick={() => router.push("/")} sx={{ padding: 0, margin: 0 }}>
-        <Image src="/icon.png" alt="logo" width={100} height={0} />
+      <Button
+        onClick={() => router.push("/")}
+        sx={{ padding: 0, margin: 0, width: 100, height: "100%" }}
+      >
+        <Image priority src="/icon.png" alt="logo" width={100} height={0} />
       </Button>
 
       <SearchBar searchText={searchText || ""} />
