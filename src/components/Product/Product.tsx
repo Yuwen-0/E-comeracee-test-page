@@ -10,7 +10,7 @@ export default function Product({ content, search }: any) {
   const price = content.price.split(".");
   const [name, setName] = useState(content.name);
   const IntPrice = formatNumber(price[0]);
-  const decimals = price[1];
+  const decimals = price[1].slice(0, 2);
 
   useEffect(() => {
     setName(
@@ -44,7 +44,11 @@ export default function Product({ content, search }: any) {
         <Image
           src={content.image}
           alt={`image for ${content.name}`}
-          style={{ width: "fit-content", height: "fit-content" }}
+          style={{
+            width: "fit-content",
+            height: "fit-content",
+            maxHeight: "256.4px",
+          }}
           width={256} // Adjusted width
           height={256} // Adjusted height
         />

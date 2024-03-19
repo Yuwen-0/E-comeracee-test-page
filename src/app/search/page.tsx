@@ -29,7 +29,7 @@ const Filter = () => {
   return (
     <Box
       sx={{
-        height: "calc(100% - 70px)", // Adjusted height to account for navbar
+        height: "calc(100vh - 70px)", // Adjusted height to account for navbar
         overflowY: "auto", // Added for child content scrolling
         display: "flex",
         flexDirection: "row",
@@ -40,7 +40,15 @@ const Filter = () => {
     >
       {content && Array.isArray(content) ? (
         content.map((content) => {
-          return <Product key={content.id} content={content} search={search} />;
+          return (
+            <>
+              <Product key={content.id} content={content} search={search} />
+              <Product key={content.id} content={content} search={search} />
+              <Product key={content.id} content={content} search={search} />
+              <Product key={content.id} content={content} search={search} />
+              <Product key={content.id} content={content} search={search} />
+            </>
+          );
         })
       ) : (
         <>

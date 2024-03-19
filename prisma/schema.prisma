@@ -26,7 +26,7 @@ model Customer {
 model Product {
   id               Int      @id @default(autoincrement())
   name             String   @db.VarChar(255)
-  description      String
+  description      String?
   shortDescription String
   category         String
   subcategory      String

@@ -29,8 +29,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           justifyContent={"space-between"}
           sx={{ overflow: "hidden" }}
         >
-          <SideFilterBar width={"18%"} height={"calc(100vh - 70px)"} />
-          <Box width={"82%"}>{children}</Box>
+          <SideFilterBar width={"17%"} height={"calc(100vh - 70px)"} />
+          <Box width={"83%"}>{children}</Box>
         </Box>
       </Theme>
     </Box>
