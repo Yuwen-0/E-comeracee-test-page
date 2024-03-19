@@ -40,15 +40,7 @@ const Filter = () => {
     >
       {content && Array.isArray(content) ? (
         content.map((content) => {
-          return (
-            <>
-              <Product key={content.id} content={content} search={search} />
-              <Product key={content.id} content={content} search={search} />
-              <Product key={content.id} content={content} search={search} />
-              <Product key={content.id} content={content} search={search} />
-              <Product key={content.id} content={content} search={search} />
-            </>
-          );
+          return <Product key={content.id} content={content} search={search} />;
         })
       ) : (
         <>

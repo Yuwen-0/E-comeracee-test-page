@@ -2,7 +2,7 @@
 import { Typography, Box, Button } from "@mui/material";
 import AuthButtons from "./AuthButtons";
 import { SessionProvider } from "next-auth/react";
-import SearchBar from "../SearchBar";
+import SearchBar from "../Search/SearchBar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

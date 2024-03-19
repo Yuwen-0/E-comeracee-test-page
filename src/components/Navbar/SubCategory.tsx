@@ -2,7 +2,6 @@
 import { Box } from "@mui/material";
 import { useRef } from "react";
 import Link from "next/link";
-import { NextRouter, useRouter } from "next/router";
 
 const SubCategory = ({ label }: { label: string }) => {
   const subCatRef = useRef<HTMLDivElement | null>(null);

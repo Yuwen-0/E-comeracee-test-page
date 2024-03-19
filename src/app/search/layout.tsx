@@ -1,6 +1,6 @@
 "use client";
 import MainNavbar from "@/components/Navbar/MainNavbar";
-import SideFilterBar from "@/components/Navbar/SideFilterBar";
+import SideFilterBar from "@/components/Search/SideFilterBar";
 import { Box } from "@mui/material";
 import Theme from "@/components/Theme";
 import { useSearchParams } from "next/navigation";
