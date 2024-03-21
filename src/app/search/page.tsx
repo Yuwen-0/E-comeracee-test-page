@@ -11,6 +11,9 @@ import { setSearchContent } from "@/store/search";
 const Filter = () => {
   const search = useSelector((store: any) => store.search.value);
   const content = useSelector((store: any) => store.search.searchContent);
+  const filteredContent = useSelector(
+    (store: any) => store.search.filteredSearchContent,
+  );
   const dispatch = useDispatch();
   const params = useSearchParams();
   const category = params.get("category");
@@ -39,9 +42,20 @@ const Filter = () => {
       }}
     >
       {content && Array.isArray(content) ? (
-        content.map((content) => {
-          return <Product key={content.id} content={content} search={search} />;
-        })
+        filteredContent[0] !== "this is emtpty" &&
+        Array.isArray(filteredContent) ? (
+          filteredContent.map((content) => {
+            return (
+              <Product key={content.id} content={content} search={search} />
+            );
+          })
+        ) : (
+          content.map((content) => {
+            return (
+              <Product key={content.id} content={content} search={search} />
+            );
+          })
+        )
       ) : (
         <>
           {console.log(content)}

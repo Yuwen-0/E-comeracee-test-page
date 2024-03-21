@@ -7,6 +7,9 @@ export const searchSlice = createSlice({
     options: {},
     categories: [],
     searchContent: [],
+    /*This filtered Contents [0] element made on purpes like this to make sure 
+    when the component first mounted the normal search content is displayed*/
+    filteredSearchContent: ["this is emtpty"],
   },
   reducers: {
     setValue: (state, action) => {
@@ -30,6 +33,11 @@ export const searchSlice = createSlice({
         ...state.options,
         ...action.payload,
       };
+      state.filteredSearchContent = state.searchContent.filter(
+        (product: any) => {
+          return action.payload[product.category];
+        },
+      );
     },
   },
 });

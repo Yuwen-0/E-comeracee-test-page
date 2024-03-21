@@ -8,17 +8,24 @@ import { setOptions } from "@/store/search";
 export default function CategoryFilter() {
   const categories = useSelector((state: any) => state.search.categories);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
-      }}
-    >
+    <Box>
       <Typography
-        sx={{ fontWeight: "bold", fontSize: "18px", paddingTop: "10px" }}
+        sx={{ paddingInline: "10px", cursor: "pointer" }}
+        fontWeight={"bold"}
+        fontSize={"20px"}
+        color={"text.secondary"}
+        display={"flex"}
+        alignItems={"center"}
       >
         Categories
+        <span
+          style={{
+            paddingInline: "7px",
+            transition: "all 0.3s ease-in-out",
+          }}
+        >
+          ▼
+        </span>
       </Typography>
       {categories.map((category: string) => {
         const key = random(0, 100_000_000, false).toString();
@@ -39,8 +46,6 @@ const CategoryOption = ({ value }: { value: string }) => {
       }),
     );
   };
-  console.log(options);
-  console.log(value);
 
   return (
     <Box
@@ -48,12 +53,13 @@ const CategoryOption = ({ value }: { value: string }) => {
         display: "flex",
         alignItems: "center",
         gap: "10px",
-        paddingInline: "10px",
-        paddingBottom: "5px",
+        padding: "7px",
         justifyContent: "space-between",
       }}
     >
-      <Typography sx={{ fontWeight: "bold" }}>{value}</Typography>
+      <Typography fontWeight={"bold"} color={"text.secondary"}>
+        - {value}
+      </Typography>
       <Checkbox
         size="small"
         onChange={setCategoryValue}

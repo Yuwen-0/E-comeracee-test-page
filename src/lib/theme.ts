@@ -12,5 +12,9 @@ export const themeOptions: ThemeOptions = {
       main: "#334266",
       light: "#839BB8",
     },
+    text: {
+      primary: "#0C090A",
+      secondary: "#1B1B1B",
+    },
   },
 };
