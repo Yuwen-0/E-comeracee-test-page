@@ -2,22 +2,33 @@
 import { Box, Checkbox, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { random } from "lodash";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { setCategoryOptions } from "@/store/search";
 
 export function FilterTemplate({
   children,
   title,
-  cotentArray,
+  contentArray,
   OptionObject,
 }: {
   children: JSX.Element;
   title: string;
-  cotentArray: any[];
+  contentArray: any[];
   OptionObject: any;
 }) {
+  const [open, setOpen] = useState(false);
+  const TitleRef = useRef<HTMLSpanElement>(null);
+  const HideContent = (e: any) => {
+    e.preventDefault();
+    setOpen(!open);
+    if (TitleRef.current) {
+      TitleRef.current.style.transform = open
+        ? "rotate(0deg)"
+        : "rotate(-90deg)";
+    }
+  };
   return (
-    <Box>
+    <Box onClick={HideContent}>
       <Typography
         sx={{ paddingInline: "10px", cursor: "pointer" }}
         fontWeight={"bold"}
@@ -25,24 +36,24 @@ export function FilterTemplate({
         color={"text.secondary"}
         display={"flex"}
         alignItems={"center"}
-        onClick={() => {
-          console.log("clicked");
-        }}
       >
         <span
           style={{
             paddingInline: "7px",
             transition: "all 0.3s ease-in-out",
           }}
+          ref={TitleRef}
         >
           ▼
         </span>
         {title}
       </Typography>
-      {cotentArray.map((content: string) => {
-        const key = random(0, 100_000_000, false).toString();
-        return <OptionObject key={key} value={content} />;
-      })}
+      <Box>
+        {contentArray.map((content: string) => {
+          const key = random(0, 100_000_000, false).toString();
+          return <OptionObject key={key} value={content} />;
+        })}
+      </Box>
     </Box>
   );
 }
@@ -52,7 +63,7 @@ export default function CategoryFilter() {
   return (
     <FilterTemplate
       OptionObject={CategoryOption}
-      cotentArray={categories}
+      contentArray={categories}
       title={"Categories"}
     >
       {categories.map((category: string) => {
@@ -68,7 +79,6 @@ const CategoryOption = ({ value }: { value: string }) => {
   const categoryOptions = useSelector(
     (state: any) => state.search.options.Category,
   );
-  console.log(categoryOptions);
   const setCategoryValue = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(
       setCategoryOptions({
