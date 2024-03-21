@@ -1,14 +1,5 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
-import { UseSelector, useDispatch } from "react-redux";
-import { setOptions } from "@/store/search";
-import CategoryFilter from "./CategoryFilter";
+import { Box } from "@mui/material";
+import CategoryFilter from "./Filter/Category/CategoryFilter";
 
 const SideFilterBar = ({
   width,
