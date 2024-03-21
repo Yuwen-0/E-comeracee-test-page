@@ -3,10 +3,19 @@ import { Box, Checkbox, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { random } from "lodash";
 import { ChangeEvent } from "react";
-import { setOptions } from "@/store/search";
+import { setCategoryOptions } from "@/store/search";
 
-export default function CategoryFilter() {
-  const categories = useSelector((state: any) => state.search.categories);
+export function FilterTemplate({
+  children,
+  title,
+  cotentArray,
+  OptionObject,
+}: {
+  children: JSX.Element;
+  title: string;
+  cotentArray: any[];
+  OptionObject: any;
+}) {
   return (
     <Box>
       <Typography
@@ -16,8 +25,10 @@ export default function CategoryFilter() {
         color={"text.secondary"}
         display={"flex"}
         alignItems={"center"}
+        onClick={() => {
+          console.log("clicked");
+        }}
       >
-        Categories
         <span
           style={{
             paddingInline: "7px",
@@ -26,35 +37,55 @@ export default function CategoryFilter() {
         >
           ▼
         </span>
+        {title}
       </Typography>
-      {categories.map((category: string) => {
+      {cotentArray.map((content: string) => {
         const key = random(0, 100_000_000, false).toString();
-        return <CategoryOption key={key} value={category} />;
+        return <OptionObject key={key} value={content} />;
       })}
     </Box>
   );
 }
 
+export default function CategoryFilter() {
+  const categories = useSelector((state: any) => state.search.categories);
+  return (
+    <FilterTemplate
+      OptionObject={CategoryOption}
+      cotentArray={categories}
+      title={"Categories"}
+    >
+      {categories.map((category: string) => {
+        const key = random(0, 100_000_000, false).toString();
+        return <CategoryOption key={key} value={category} />;
+      })}
+    </FilterTemplate>
+  );
+}
+
 const CategoryOption = ({ value }: { value: string }) => {
   const dispatch = useDispatch();
-  const options = useSelector((state: any) => state.search.options);
+  const categoryOptions = useSelector(
+    (state: any) => state.search.options.Category,
+  );
+  console.log(categoryOptions);
   const setCategoryValue = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      setOptions({
-        ...options,
-        [value]: e.target.checked,
+      setCategoryOptions({
+        name: value,
+        value: e.target.checked,
       }),
     );
   };
-
   return (
     <Box
       sx={{
         display: "flex",
         alignItems: "center",
-        gap: "10px",
-        padding: "7px",
+        paddingInline: "7px",
         justifyContent: "space-between",
+        marginLeft: "17px",
+        width: "80%",
       }}
     >
       <Typography fontWeight={"bold"} color={"text.secondary"}>
@@ -63,7 +94,7 @@ const CategoryOption = ({ value }: { value: string }) => {
       <Checkbox
         size="small"
         onChange={setCategoryValue}
-        checked={options[value]}
+        checked={categoryOptions[value] || false}
         color="secondary"
       />
     </Box>

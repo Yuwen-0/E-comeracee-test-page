@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface CategoryOptions {
+  [key: string]: boolean;
+}
+
 export const searchSlice = createSlice({
   name: "counter",
   initialState: {
     value: "",
-    options: {},
+    options: { Category: {} as CategoryOptions },
     categories: [],
     searchContent: [],
     /*This filtered Contents [0] element made on purpes like this to make sure 
@@ -24,26 +28,31 @@ export const searchSlice = createSlice({
       state.options = action.payload.reduce((acc: any, product: any) => {
         return {
           ...acc,
-          [product.category]: true,
+          Category: {
+            ...acc.Category,
+            [product.category]: true,
+          },
         };
       }, {});
+      state.filteredSearchContent = action.payload;
     },
-    setOptions: (state, action) => {
+    setCategoryOptions: (state, action) => {
       state.options = {
         ...state.options,
-        ...action.payload,
+        Category: {
+          ...state.options.Category,
+          [action.payload.name]: action.payload.value,
+        },
       };
       state.filteredSearchContent = state.searchContent.filter(
-        (product: any) => {
-          return action.payload[product.category];
-        },
+        (product: any) => state.options.Category[product.category],
       );
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setValue, clearValue, setSearchContent, setOptions } =
+export const { setValue, clearValue, setSearchContent, setCategoryOptions } =
   searchSlice.actions;
 
 export default searchSlice.reducer;
