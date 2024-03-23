@@ -6,7 +6,7 @@ export default function FilterTemplate({
   children,
   title,
 }: {
-  children: JSX.Element;
+  children: any;
   title: string;
 }) {
   const [open, setOpen] = useState(false);

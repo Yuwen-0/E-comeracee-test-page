@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import CategoryFilter from "./Filter/Category/CategoryFilter";
+import PriceFilter from "./Filter/Price/PriceFilter";
 
 const SideFilterBar = ({
   width,
@@ -19,8 +20,8 @@ const SideFilterBar = ({
       }}
     >
       <CategoryFilter />
+      <PriceFilter />
       {/*
-        <PriceFilter />
         <ColorFilter />
         <SizeFilter />
         <BrandFilter /> 

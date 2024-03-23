@@ -4,7 +4,7 @@ import FilterTemplate from "../FilterTemplate";
 import CategoryOption from "./CategoryOption";
 
 export default function CategoryFilter() {
-  const categories = useSelector((state: any) => state.search.categories);
+  const categories = useSelector((state: any) => state.search.values.Category);
   return (
     <FilterTemplate title={"Categories"}>
       {categories.map((category: string) => {
