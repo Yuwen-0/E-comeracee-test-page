@@ -114,6 +114,8 @@ const setFilteredSearchContent = (state: SearchState) => {
       });
     }
 
+    if (selectedCategories.length === 0 || selectedPrices.length === 0)
+      return false;
     return categoryMatch && priceMatch;
   });
 };
