@@ -2,13 +2,13 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { ...productData } = await request.json();
-  const product = await db.product.create({
-    data: {
-      ...productData,
-    },
-  });
-  return NextResponse.json({ product });
+  const products = await request.json();
+  const createdProducts = Promise.all(
+    products.map(async (product: any) => {
+      return await db.product.create({ data: product });
+    }),
+  );
+  return NextResponse.json({ products: await createdProducts });
 }
 
 export async function GET(request: Request) {

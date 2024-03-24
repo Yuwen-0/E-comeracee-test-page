@@ -10,9 +10,13 @@ export default function Product({ content, search }: any) {
   const price = content.price.split(".");
   const [name, setName] = useState(content.name);
   const IntPrice = formatNumber(price[0]);
-  const decimals = price[1].slice(0, 2);
+  let decimals = "";
+  if (price[1]) {
+    decimals = price[1].slice(0, 2);
+  }
 
   useEffect(() => {
+    if (search === "") setName(content.name);
     setName(
       content.name.replace(
         new RegExp(search, "gi"),
@@ -42,15 +46,13 @@ export default function Product({ content, search }: any) {
         }}
       >
         <Image
-          src={content.image}
-          alt={`image for ${content.name}`}
-          style={{
-            width: "fit-content",
-            height: "fit-content",
-            maxHeight: "256.4px",
-          }}
-          width={256} // Adjusted width
-          height={256} // Adjusted height
+          src={
+            "https://images.unsplash.com/photo-1711139279274-ddff5036591a?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          }
+          alt={content.name}
+          width={256.4}
+          height={256.4}
+          style={{ objectFit: "cover" }}
         />
       </Box>
       <Box
@@ -65,7 +67,7 @@ export default function Product({ content, search }: any) {
         <Typography>
           <span style={{ fontWeight: "bold" }}>$</span>
           <strong>{IntPrice}</strong>
-          <sup style={{ fontWeight: "bold" }}>{decimals}</sup>
+          {decimals && <sup style={{ fontWeight: "bold" }}>{decimals}</sup>}
         </Typography>
         <Typography>{content.description}</Typography>
       </Box>

@@ -15,12 +15,33 @@ const SideFilterBar = ({
         width,
         height,
         backgroundColor: "primary.light",
-        textAlign: "center",
-        borderRight: "1px solid black",
+        display: "flex",
+        flexDirection: "column",
+        overflowY: "auto",
       }}
     >
-      <CategoryFilter />
-      <PriceFilter />
+      <Box
+        sx={{
+          overflowY: "scroll",
+          height: "100%",
+          "&::-webkit-scrollbar": {
+            width: "10px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "transparent",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "rgba(0, 0, 0, 0.3)",
+          },
+        }}
+      >
+        <CategoryFilter />
+        <PriceFilter />
+      </Box>
       {/*
         <ColorFilter />
         <SizeFilter />
