@@ -23,12 +23,7 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body
-          className={balsamiq.className}
-          style={{ margin: 0, overflow: "hidden" }}
-        >
-          {children}
-        </body>
+        <body className={balsamiq.className}>{children}</body>
       </html>
     </StoreProvider>
   );

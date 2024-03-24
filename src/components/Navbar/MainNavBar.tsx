@@ -3,7 +3,6 @@ import { Typography, Box, Button } from "@mui/material";
 import AuthButtons from "./AuthButtons";
 import { SessionProvider } from "next-auth/react";
 import SearchBar from "../Search/SearchBar";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const MainNavbar = ({
@@ -40,13 +39,12 @@ const MainNavbar = ({
     >
       <Button
         onClick={() => router.push("/")}
-        sx={{ padding: 0, margin: 0, width: 100, height: "100%" }}
+        sx={{ padding: 0, margin: 0, width: 100 }}
+        color="secondary"
       >
-        <Image priority src="/icon.png" alt="logo" width={100} height={0} />
+        <Typography fontWeight={"bold"}>Boundless</Typography>
       </Button>
-
       <SearchBar searchText={searchText || ""} />
-
       <SessionProvider>
         <AuthButtons />
       </SessionProvider>

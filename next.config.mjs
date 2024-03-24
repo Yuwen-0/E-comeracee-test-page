@@ -1,9 +1,21 @@
 const images = {
-  domains: [
-    "images.unsplash.com",
-    "m.media-amazon.com",
-    "placeholder.com",
-    "unsplash.com",
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "images.unsplash.com",
+    },
+    {
+      protocol: "https",
+      hostname: "images.prismic.io",
+    },
+    {
+      protocol: "https",
+      hostname: "res.cloudinary.com",
+    },
+    {
+      protocol: "https",
+      hostname: "images.ctfassets.net",
+    },
   ],
 };
 

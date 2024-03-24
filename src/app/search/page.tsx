@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { filterBy } from "@/lib/products";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import Product from "@/components/Product/Product";
 import ProductSkeleton from "@/components/Product/ProductSkeleton";
 import { useSelector, useDispatch } from "react-redux";
@@ -41,30 +41,37 @@ const Filter = () => {
         flexWrap: "wrap",
       }}
     >
-      {content && Array.isArray(content) ? (
-        filteredContent[0] !== "this is emtpty" &&
-        Array.isArray(filteredContent) ? (
-          filteredContent.map((content) => {
-            return (
-              <Product key={content.id} content={content} search={search} />
-            );
-          })
-        ) : (
-          content.map((content) => {
-            return (
-              <Product key={content.id} content={content} search={search} />
-            );
-          })
-        )
-      ) : (
-        <>
-          {console.log(content)}
-          <ProductSkeleton />
-          <ProductSkeleton />
-          <ProductSkeleton />
-          <ProductSkeleton />
-        </>
+      {((Array.isArray(content) && content.length === 0) ||
+        (Array.isArray(filteredContent) && filteredContent.length === 0)) && (
+        <Typography>
+          We Could't Find The Product You Are Looking For{" "}
+          <Link href="/">Go Back To Home</Link>
+        </Typography>
       )}
+      {content !== false &&
+        (Array.isArray(content) ? (
+          filteredContent[0] !== "this is emtpty" &&
+          Array.isArray(filteredContent) ? (
+            filteredContent.map((content) => {
+              return (
+                <Product key={content.id} content={content} search={search} />
+              );
+            })
+          ) : (
+            content.map((content) => {
+              return (
+                <Product key={content.id} content={content} search={search} />
+              );
+            })
+          )
+        ) : (
+          <>
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+          </>
+        ))}
     </Box>
   );
 };
