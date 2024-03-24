@@ -31,9 +31,13 @@ export const searchSlice = createSlice({
     },
     setSearchContent: (state, action) => {
       state.searchContent = action.payload;
-      state.values.Category = action.payload.map(
-        (product: any) => product.category,
-      );
+      state.values.Category = action.payload
+        .map((product: any) => product.category)
+        .sort()
+        .reduce((acc: any, product: any) => {
+          if (!acc.includes(product)) acc.push(product);
+          return acc;
+        }, []);
       state.values.Price = action.payload
         .map((product: any) => {
           if (product.price >= 0 && product.price <= 100) return "0 - 100";
@@ -41,7 +45,16 @@ export const searchSlice = createSlice({
           if (product.price > 200 && product.price <= 300) return "200 - 300";
           if (product.price > 300 && product.price <= 400) return "300 - 400";
           if (product.price > 400 && product.price <= 500) return "400 - 500";
-          return "500+";
+          if (product.price > 500 && product.price <= 1000) return "500 - 1000";
+          if (product.price > 1000 && product.price <= 2000)
+            return "1000 - 2000";
+          if (product.price > 2000 && product.price <= 3000)
+            return "2000 - 3000";
+          if (product.price > 3000 && product.price <= 4000)
+            return "3000 - 4000";
+          if (product.price > 4000 && product.price <= 5000)
+            return "4000 - 5000";
+          return "5000+";
         })
         .sort()
         .reduce((acc: any, product: any) => {
@@ -107,7 +120,7 @@ const setFilteredSearchContent = (state: SearchState) => {
       priceMatch = selectedPrices.some((price) => {
         const [min, max] = price.split(" - ");
         const productPrice = product.price;
-        if (min === "500+" && productPrice >= 500) return true;
+        if (min === "5000+" && productPrice >= 5000) return true;
         return (
           productPrice >= parseInt(min, 10) && productPrice <= parseInt(max, 10)
         );
