@@ -53,6 +53,7 @@ export default function Product({ content, search }: any) {
           width={256.4}
           height={256.4}
           style={{ objectFit: "cover" }}
+          priority
         />
       </Box>
       <Box

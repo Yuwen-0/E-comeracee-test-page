@@ -26,6 +26,9 @@ const images = {
 const config = {
   images,
   reactStrictMode: true,
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default config;

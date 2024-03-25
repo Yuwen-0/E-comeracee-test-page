@@ -16,18 +16,10 @@ const Filter = () => {
   );
   const dispatch = useDispatch();
   const params = useSearchParams();
-  const category = params.get("category");
-  const name = params.get("name");
+
   useEffect(() => {
-    const getContent = async () => {
-      dispatch(
-        setSearchContent(
-          await filterBy(category, name).then((content) => content.products),
-        ),
-      );
-    };
-    getContent();
-  }, [category, name, dispatch]);
+    getContent(params, dispatch);
+  }, [search, params, dispatch]);
 
   return (
     <Box
@@ -76,3 +68,13 @@ const Filter = () => {
   );
 };
 export default Filter;
+
+const getContent = async (params: any, dispatch: any) => {
+  const category = params.get("category");
+  const name = params.get("name");
+  dispatch(
+    setSearchContent(
+      await filterBy(category, name).then((content) => content.products),
+    ),
+  );
+};
