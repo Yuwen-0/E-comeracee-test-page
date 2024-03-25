@@ -27,7 +27,7 @@ const Filter = () => {
       );
     };
     getContent();
-  }, [category, name]);
+  }, [category, name, dispatch]);
 
   return (
     <Box
@@ -44,7 +44,7 @@ const Filter = () => {
       {((Array.isArray(content) && content.length === 0) ||
         (Array.isArray(filteredContent) && filteredContent.length === 0)) && (
         <Typography>
-          We Could't Find The Product You Are Looking For{" "}
+          We Couldn&apos;t Find The Product You Are Looking For{" "}
           <Link href="/">Go Back To Home</Link>
         </Typography>
       )}
