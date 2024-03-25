@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import SearchBar from "../Search/SearchBar";
 import { useRouter } from "next/navigation";
 
-const MainNavbar = ({
+const MainNavBar = ({
   width,
   height,
   backgroundColor,
@@ -52,4 +52,4 @@ const MainNavbar = ({
   );
 };
 
-export default MainNavbar;
+export default MainNavBar;

@@ -1,6 +1,6 @@
 import { AppBar, Box } from "@mui/material";
 import CatogoryNavBar from "./CatogoryNavBar";
-import MainNavbar from "./MainNavbar";
+import MainNavbar from "@/components/Navbar/MainNavBar";
 import Theme from "@/components/Theme";
 
 export default async function Navbar() {

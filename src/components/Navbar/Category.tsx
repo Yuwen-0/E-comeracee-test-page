@@ -20,7 +20,7 @@ export default function Category({ value }: { value: any }) {
       subCategoryLabels.length * 40 +
       subCategoryLabels.length * (label === "Clothing" ? 13 : 10)
     }px`;
-    anchor.style.top = "50.5px";
+    anchor.style.top = "54.5px";
     anchor.style.opacity = "1";
     arrow.style.transform = "rotate(180deg)";
   };

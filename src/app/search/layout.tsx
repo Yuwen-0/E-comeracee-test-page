@@ -1,5 +1,5 @@
 "use client";
-import MainNavbar from "@/components/Navbar/MainNavbar";
+import MainNavBar from "@/components/Navbar/MainNavBar";
 import SideFilterBar from "@/components/Search/SideFilterBar";
 import { Box } from "@mui/material";
 import Theme from "@/components/Theme";
@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box sx={{ height: "100%", overflow: "hidden" }}>
       <Theme>
-        <MainNavbar
+        <MainNavBar
           padding={"15px 10px 10px 10px"}
           backgroundColor="primary.main"
           width={undefined}
