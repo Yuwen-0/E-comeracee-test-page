@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <Box sx={{ height: "100%", overflow: "hidden" }}>
       <Theme>
         <MainNavBar
-          padding={"15px 10px 10px 10px"}
+          padding={1.2}
           backgroundColor="primary.main"
           width={undefined}
           height={70}

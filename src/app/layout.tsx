@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Balsamiq_Sans } from "next/font/google";
 import "./(main)/globals.css";
 import StoreProvider from "@/store/StoreProvider";
+import MainNavBar from "@/components/Navbar/MainNavBar";
+import Theme from "@/components/Theme";
 const balsamiq = Balsamiq_Sans({
   subsets: ["latin"],
   weight: "700",
@@ -22,9 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-      <html lang="en">
-        <body className={balsamiq.className}>{children}</body>
-      </html>
+      <Theme>
+        <html lang="en">
+          <body className={balsamiq.className}>{children}</body>
+        </html>
+      </Theme>
     </StoreProvider>
   );
 }

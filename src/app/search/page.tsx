@@ -41,7 +41,7 @@ const Filter = () => {
         </Typography>
       )}
       {content !== false &&
-        (Array.isArray(content) ? (
+        (Array.isArray(content) && content[0] ? (
           filteredContent[0] !== "this is emtpty" &&
           Array.isArray(filteredContent) ? (
             filteredContent.map((content) => {
