@@ -7,9 +7,16 @@ import { useEffect, useState } from "react";
 
 export default function Product({ content, search }: any) {
   const router = useRouter();
-  const price = content.price.split(".");
+  let price = [""];
+  if (content.price && parseInt(content.price) > 0) {
+    price = content.price.split(".");
+  }
+
   const [name, setName] = useState(content.name);
-  const IntPrice = formatNumber(price[0]);
+  let IntPrice = "";
+  if (price[0]) {
+    IntPrice = formatNumber(price[0]);
+  }
   let decimals = "";
   if (price[1]) {
     decimals = price[1].slice(0, 2);
@@ -47,7 +54,9 @@ export default function Product({ content, search }: any) {
       >
         <Image
           src={
-            "https://images.unsplash.com/photo-1711139279274-ddff5036591a?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            content.image
+              ? content.image
+              : "https://images.unsplash.com/photo-1711139279274-ddff5036591a?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
           alt={content.name}
           width={256.4}
@@ -66,8 +75,7 @@ export default function Product({ content, search }: any) {
       >
         <Typography dangerouslySetInnerHTML={{ __html: name }} />
         <Typography>
-          <span style={{ fontWeight: "bold" }}>$</span>
-          <strong>{IntPrice}</strong>
+          <strong>{IntPrice ? "$" + IntPrice : "Price"}</strong>
           {decimals && <sup style={{ fontWeight: "bold" }}>{decimals}</sup>}
         </Typography>
         <Typography>{content.description}</Typography>

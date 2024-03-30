@@ -1,4 +1,5 @@
 import MainNavBar from "@/components/Navbar/MainNavBar";
+import { Box } from "@mui/material";
 
 export default function CreateProductLayout({
   children,
@@ -6,7 +7,7 @@ export default function CreateProductLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <Box sx={{ height: "100vh", overflow: "hidden" }}>
       <MainNavBar
         searchText={""}
         width={"100%"}
@@ -15,7 +16,9 @@ export default function CreateProductLayout({
         backgroundColor={"primary.main"}
         padding={2}
       />
-      {children}
-    </>
+      <Box sx={{ height: "calc(100vh - 70px)" }} padding={"20px 20px 0 20px"}>
+        {children}
+      </Box>
+    </Box>
   );
 }

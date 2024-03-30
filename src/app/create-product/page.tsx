@@ -1,30 +1,38 @@
-"use client";
-import { Input } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { setImage } from "@/store/create-product";
-import { ChangeEvent } from "react";
-import Image from "next/image";
+import ImageUploader from "@/components/Product/CreateProduct/ImageUploader";
+import PreviewProduct from "@/components/Product/CreateProduct/PreviewProduct";
+import ProductNameSetter from "@/components/Product/CreateProduct/ProductNameSetter";
+import { Box } from "@mui/material";
 
 export default function CreateProduct() {
-  const dispatch = useDispatch();
-  const image = useSelector((state: any) => state.createProduct.image);
-  const setImageValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        dispatch(setImage(reader.result as string));
-      }
-    };
-    if (e.target.files) reader.readAsDataURL(e.target.files[0]);
-  };
   return (
     <>
-      <form>
-        <Input
-          type="file"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setImageValue(e)}
-        />
-        <Image src={image} alt="image" width={200} height={200} />
+      <form
+        action=""
+        method="post"
+        encType="multipart/form-data"
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          gap: "10px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: "10px",
+            flexGrow: 7,
+          }}
+          id="Inputs"
+        >
+          <ProductNameSetter />
+          <ImageUploader />
+        </Box>
+        <Box sx={{ flexGrow: 2, justifyContent: "center" }} id="Preview">
+          <PreviewProduct />
+        </Box>
       </form>
     </>
   );

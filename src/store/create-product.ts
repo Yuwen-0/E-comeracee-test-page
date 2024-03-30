@@ -27,8 +27,11 @@ export const createProductSlice = createSlice({
     setImage: (state, action) => {
       state.image = action.payload;
     },
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { setImage } = createProductSlice.actions;
+export const { setImage, setName } = createProductSlice.actions;
 export default createProductSlice.reducer;
