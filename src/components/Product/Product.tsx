@@ -9,6 +9,7 @@ export default function Product({ content, search }: any) {
   const router = useRouter();
   const IntPrice = formatNumber(JSON.stringify(content.price[0]));
   const decimals = content.price[1];
+  const currency = content.currency;
   const [name, setName] = useState(content.name);
 
   useEffect(() => {
@@ -64,7 +65,9 @@ export default function Product({ content, search }: any) {
       >
         <Typography dangerouslySetInnerHTML={{ __html: name }} />
         <Typography>
-          <strong>{IntPrice ? "$" + IntPrice : "Price"}</strong>
+          <strong>
+            {IntPrice ? (currency ? currency : "$") + IntPrice : "Price"}
+          </strong>
           {decimals !== 0 && (
             <sup style={{ fontWeight: "bold" }}>{decimals}</sup>
           )}

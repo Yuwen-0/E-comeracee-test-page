@@ -9,7 +9,7 @@ const ProductNameSetter = () => {
   const dispatch = useDispatch();
   return (
     <TextField
-      sx={{ width: "25%" }}
+      sx={{ width: "31%" }}
       id="title"
       name="Title"
       label="Name"

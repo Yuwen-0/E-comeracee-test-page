@@ -20,7 +20,7 @@ const ImageUploader = () => {
   return (
     <Button
       color="secondary"
-      sx={{ width: "25%" }}
+      sx={{ width: "31%" }}
       component="label"
       variant="contained"
     >

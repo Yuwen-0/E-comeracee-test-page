@@ -5,12 +5,12 @@ import Image from "next/image";
 import Product from "../Product";
 
 const PreviewProduct = () => {
-  const { name, image, price } = useSelector(
+  const { name, image, price, currency } = useSelector(
     (state: any) => state.createProduct,
   );
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Product content={{ name, image, price }} search="" />
+      <Product content={{ name, image, price, currency }} search="" />
     </Box>
   );
 };

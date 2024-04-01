@@ -1,9 +1,14 @@
 "use client";
-import { Box, TextField } from "@mui/material";
+import {
+  Box,
+  TextField,
+  FormControl,
+  InputLabel,
+  NativeSelect,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setPrice } from "@/store/create-product";
+import { setPrice, setCurrency } from "@/store/create-product";
 import { ChangeEvent } from "react";
-import { useFormControl } from "@mui/material";
 
 const PriceSetter = () => {
   const price = useSelector((state: any) => state.createProduct.price);
@@ -22,10 +27,32 @@ const PriceSetter = () => {
       dispatch(setPrice(newPrice));
     };
 
+  const setCurrencyValue = (e: ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setCurrency(e.target.value));
+  };
+
   return (
-    <Box sx={{ display: "flex", gap: "10px", width: "25%" }}>
+    <Box sx={{ display: "flex", gap: "10px", width: "50%" }}>
+      <FormControl sx={{ width: "12%", display: "inline-block" }}>
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          Currency
+        </InputLabel>
+        <NativeSelect
+          defaultValue={30}
+          inputProps={{
+            name: "age",
+            id: "uncontrolled-native",
+          }}
+          onChange={setCurrencyValue}
+        >
+          <option value={"$"}>$</option>
+          <option value={"€"}>€</option>
+          <option value={"£"}>£</option>
+          <option value={"₹"}>₹</option>
+        </NativeSelect>
+      </FormControl>
       <TextField
-        sx={{ width: "12,5%", display: "inline-block" }}
+        sx={{ width: "30%", display: "inline-block" }}
         id="IntPrice"
         name="Price"
         label="Integers"
@@ -34,7 +61,7 @@ const PriceSetter = () => {
         onChange={setPriceValue(0)}
       />
       <TextField
-        sx={{ width: "12,5%", display: "inline-block" }}
+        sx={{ width: "16%", display: "inline-block" }}
         id="decimals"
         name="Price"
         label="decimals"

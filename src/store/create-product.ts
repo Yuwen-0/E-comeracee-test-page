@@ -33,8 +33,12 @@ export const createProductSlice = createSlice({
     setPrice: (state, action: { payload: number[] }) => {
       state.price = action.payload;
     },
+    setCurrency: (state, action) => {
+      state.currency = action.payload;
+    },
   },
 });
 
-export const { setImage, setName, setPrice } = createProductSlice.actions;
+export const { setImage, setName, setPrice, setCurrency } =
+  createProductSlice.actions;
 export default createProductSlice.reducer;
