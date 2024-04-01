@@ -4,7 +4,7 @@ export const createProductSlice = createSlice({
   name: "createProduct",
   initialState: {
     name: "This is the name of the product",
-    description: "",
+    description: "This is the description for the product",
     shortDescription: "",
     category: "",
     subcategory: "",
@@ -36,9 +36,12 @@ export const createProductSlice = createSlice({
     setCurrency: (state, action) => {
       state.currency = action.payload;
     },
+    setDescription: (state, action) => {
+      state.description = action.payload;
+    },
   },
 });
 
-export const { setImage, setName, setPrice, setCurrency } =
+export const { setImage, setName, setPrice, setCurrency, setDescription } =
   createProductSlice.actions;
 export default createProductSlice.reducer;
