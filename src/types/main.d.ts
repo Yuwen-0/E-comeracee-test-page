@@ -7,7 +7,7 @@ interface ProductData {
   subcategory: string; // Product subcategory (optional)
   brand: string; // Product brand
   sku: string; // Stock Keeping Unit (unique identifier)
-  price: number; // Product price
+  price: number[]; // Product price
   salePrice?: number; // Discounted price (optional)
   currency: string; // Currency code (e.g., USD, EUR)
   inventoryLevel: number; // Current stock availability

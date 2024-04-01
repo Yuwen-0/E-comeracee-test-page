@@ -12,7 +12,7 @@ const ProductNameSetter = () => {
       sx={{ width: "25%" }}
       id="title"
       name="Title"
-      label="Title"
+      label="Name"
       value={name}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         dispatch(setName(e.target.value))

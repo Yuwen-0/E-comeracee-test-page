@@ -10,7 +10,7 @@ export const createProductSlice = createSlice({
     subcategory: "",
     brand: "",
     sku: "",
-    price: 0,
+    price: [0, 0],
     salePrice: 0,
     currency: "",
     inventoryLevel: 0,
@@ -30,8 +30,11 @@ export const createProductSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
+    setPrice: (state, action: { payload: number[] }) => {
+      state.price = action.payload;
+    },
   },
 });
 
-export const { setImage, setName } = createProductSlice.actions;
+export const { setImage, setName, setPrice } = createProductSlice.actions;
 export default createProductSlice.reducer;

@@ -16,7 +16,7 @@ export default function CreateProductLayout({
         backgroundColor={"primary.main"}
         padding={2}
       />
-      <Box sx={{ height: "calc(100vh - 70px)" }} padding={"20px 20px 0 20px"}>
+      <Box sx={{ height: "calc(100vh - 70px)" }} padding={"20px"}>
         {children}
       </Box>
     </Box>

@@ -7,7 +7,7 @@ import Product from "../Product";
 const PreviewProduct = () => {
   const { name, image } = useSelector((state: any) => state.createProduct);
   return (
-    <Box>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Product content={{ name, image }} search="" />
     </Box>
   );
