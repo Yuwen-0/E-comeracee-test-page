@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createProductSlice = createSlice({
   name: "createProduct",
   initialState: {
-    name: "",
+    name: "This is the name of the product",
     description: "",
     shortDescription: "",
     category: "",

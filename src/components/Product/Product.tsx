@@ -7,20 +7,9 @@ import { useEffect, useState } from "react";
 
 export default function Product({ content, search }: any) {
   const router = useRouter();
-  let price = [""];
-  if (content.price && parseInt(content.price) > 0) {
-    price = content.price.split(".");
-  }
-
+  const IntPrice = formatNumber(JSON.stringify(content.price[0]));
+  const decimals = content.price[1];
   const [name, setName] = useState(content.name);
-  let IntPrice = "";
-  if (price[0]) {
-    IntPrice = formatNumber(price[0]);
-  }
-  let decimals = "";
-  if (price[1]) {
-    decimals = price[1].slice(0, 2);
-  }
 
   useEffect(() => {
     if (search === "") setName(content.name);
@@ -76,7 +65,9 @@ export default function Product({ content, search }: any) {
         <Typography dangerouslySetInnerHTML={{ __html: name }} />
         <Typography>
           <strong>{IntPrice ? "$" + IntPrice : "Price"}</strong>
-          {decimals && <sup style={{ fontWeight: "bold" }}>{decimals}</sup>}
+          {decimals !== 0 && (
+            <sup style={{ fontWeight: "bold" }}>{decimals}</sup>
+          )}
         </Typography>
         <Typography>{content.description}</Typography>
       </Box>

@@ -13,9 +13,11 @@ const PriceSetter = () => {
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const newPrice = [...price];
       if (index === 0) {
-        newPrice[index] = Math.max(parseInt(e.target.value), 0);
+        const integers = Math.max(parseInt(e.target.value) || 0, 0);
+        newPrice[index] = Math.min(integers, 100000000000);
       } else {
-        newPrice[index] = Math.min(parseInt(e.target.value), 99);
+        const decimals = Math.max(parseInt(e.target.value) || 0, 0);
+        newPrice[index] = Math.min(decimals, 99);
       }
       dispatch(setPrice(newPrice));
     };
@@ -28,7 +30,6 @@ const PriceSetter = () => {
         name="Price"
         label="Integers"
         type="number"
-        min={0}
         value={price[0]}
         onChange={setPriceValue(0)}
       />
@@ -38,7 +39,6 @@ const PriceSetter = () => {
         name="Price"
         label="decimals"
         type="number"
-        max={99}
         value={price[1]}
         onChange={setPriceValue(1)}
       />
