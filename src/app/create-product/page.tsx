@@ -11,6 +11,7 @@ export default function CreateProduct() {
         action=""
         method="post"
         encType="multipart/form-data"
+        id="form"
         style={{
           width: "100%",
           height: "100%",
@@ -32,9 +33,6 @@ export default function CreateProduct() {
           <ImageUploader />
           <PriceSetter />
         </Box>
-        <span
-          style={{ width: "1px", height: "100%", border: "1px solid black" }}
-        />
         <Box sx={{ flexGrow: 2, justifyContent: "center" }} id="Preview">
           <PreviewProduct />
         </Box>

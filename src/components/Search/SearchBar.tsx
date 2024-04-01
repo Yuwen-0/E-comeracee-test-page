@@ -27,6 +27,7 @@ const SearchBar = ({ searchText }: { searchText: string }) => {
     <form onSubmit={handleSubmit}>
       <FormControl>
         <Input
+          id="search"
           sx={{ width: "300px" }}
           placeholder="Search..."
           startAdornment={

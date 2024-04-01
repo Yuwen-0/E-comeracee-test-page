@@ -24,7 +24,7 @@ const PriceSetter = () => {
     <Box sx={{ display: "flex", gap: "10px", width: "25%" }}>
       <TextField
         sx={{ width: "12,5%", display: "inline-block" }}
-        id="price"
+        id="IntPrice"
         name="Price"
         label="Integers"
         type="number"
@@ -34,7 +34,7 @@ const PriceSetter = () => {
       />
       <TextField
         sx={{ width: "12,5%", display: "inline-block" }}
-        id="price"
+        id="decimals"
         name="Price"
         label="decimals"
         type="number"
