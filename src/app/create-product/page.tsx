@@ -1,9 +1,8 @@
 import ImageUploader from "@/components/Product/CreateProduct/ImageUploader";
 import PreviewProduct from "@/components/Product/CreateProduct/PreviewProduct";
 import PriceSetter from "@/components/Product/CreateProduct/PriceSetter";
-import ProductNameSetter from "@/components/Product/CreateProduct/ProductNameSetter";
-import DescriptionSetter from "@/components/Product/CreateProduct/DescriptionSetter";
 import { Box } from "@mui/material";
+import TextSetter from "@/components/Product/CreateProduct/TextSetter";
 
 export default function CreateProduct() {
   return (
@@ -30,10 +29,19 @@ export default function CreateProduct() {
           }}
           id="Inputs"
         >
-          <ProductNameSetter />
+          <TextSetter
+            SetterFunctionName={"setName"}
+            valueName="name"
+            id="name"
+          />
           <ImageUploader />
           <PriceSetter />
-          <DescriptionSetter />
+          <TextSetter
+            multiline
+            SetterFunctionName={"setDescription"}
+            valueName="description"
+            id="description"
+          />
         </Box>
         <Box sx={{ flexGrow: 2, justifyContent: "center" }} id="Preview">
           <PreviewProduct />
