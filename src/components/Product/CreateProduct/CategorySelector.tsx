@@ -1,31 +1,38 @@
 "use client";
 import { FormControl, InputLabel, NativeSelect } from "@mui/material";
 import { setCategory } from "@/store/create-product";
-const CategorySelector = () => {
+import * as Setters from "@/store/create-product";
+type CategoryProps = {
+  optionsArray: string[];
+  label: string;
+  SetterName: string;
+};
+const CategorySelectorTemplate = ({
+  optionsArray,
+  label,
+  SetterName,
+}: CategoryProps) => {
+  const Setter: any = Setters[SetterName as keyof typeof Setters];
   return (
     <FormControl sx={{ width: "31%" }}>
-      <InputLabel variant="standard" htmlFor="CategorySelect">
-        Categories
+      <InputLabel variant="standard" htmlFor={label}>
+        {label}
       </InputLabel>
       <NativeSelect
         variant="outlined"
         defaultValue={30}
         inputProps={{
-          name: "age",
-          id: "CategorySelect",
+          name: label,
+          id: label,
         }}
-        onChange={setCategory}
+        onChange={Setter}
       >
-        <option value={"Tech"}>Tech</option>
-        <option value={"Clothing"}>Clothing</option>
-        <option value={"Accessories"}>Accessories</option>
-        <option value={"Home & Garden"}>Home & Garden</option>
-        <option value={"Beauty & Health"}>Beauty & Health</option>
-        <option value={"Toys & Games"}>Toys & Games</option>
-        <option value={"Sports & Outdoors"}>Sports & Outdoors</option>
+        {optionsArray.map((ContentName: string) => (
+          <option value={ContentName}>{ContentName}</option>
+        ))}
       </NativeSelect>
     </FormControl>
   );
 };
 
-export default CategorySelector;
+export default CategorySelectorTemplate;

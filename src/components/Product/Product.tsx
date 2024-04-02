@@ -11,7 +11,7 @@ export default function Product({ content, search }: any) {
   const IntPrice = formatNumber(JSON.stringify(price));
   const decimals = content.price[1];
   const currency = content.currency;
-  const description = content.description;
+  const shortDescription = content.shortDescription;
   const [name, setName] = useState(content.name);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Product({ content, search }: any) {
             <sup style={{ fontWeight: "bold" }}>{decimals}</sup>
           )}
         </Typography>
-        <Typography>{description}</Typography>
+        <Typography>{shortDescription}</Typography>
       </Box>
     </Box>
   );

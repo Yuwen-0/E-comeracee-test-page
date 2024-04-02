@@ -3,7 +3,7 @@ import PreviewProduct from "@/components/Product/CreateProduct/PreviewProduct";
 import PriceSetter from "@/components/Product/CreateProduct/PriceSetter";
 import { Box } from "@mui/material";
 import TextSetter from "@/components/Product/CreateProduct/TextSetter";
-import CategorySelector from "@/components/Product/CreateProduct/CategorySelector";
+import CategorySelectorTemplate from "@/components/Product/CreateProduct/CategorySelector";
 
 export default function CreateProduct() {
   return (
@@ -43,7 +43,17 @@ export default function CreateProduct() {
             valueName="shortDescription"
             id="shortDescription"
           />
-          <CategorySelector />
+          <CategorySelectorTemplate
+            optionsArray={[
+              "Tech",
+              "Clothing",
+              "Beauty & Health",
+              "Toys & Games",
+              "Sports & Outdoors",
+            ]}
+            label={"Category"}
+            SetterName={"setCategory"}
+          />
         </Box>
         <Box sx={{ flexGrow: 2, justifyContent: "center" }} id="Preview">
           <PreviewProduct />
