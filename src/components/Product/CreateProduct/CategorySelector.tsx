@@ -4,14 +4,15 @@ import { setCategory } from "@/store/create-product";
 const CategorySelector = () => {
   return (
     <FormControl sx={{ width: "31%" }}>
-      <InputLabel variant="standard" htmlFor="uncontrolled-native">
-        Currency
+      <InputLabel variant="standard" htmlFor="CategorySelect">
+        Categories
       </InputLabel>
       <NativeSelect
+        variant="outlined"
         defaultValue={30}
         inputProps={{
           name: "age",
-          id: "uncontrolled-native",
+          id: "CategorySelect",
         }}
         onChange={setCategory}
       >

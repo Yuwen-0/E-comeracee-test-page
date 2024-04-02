@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 
 export default function Product({ content, search }: any) {
   const router = useRouter();
-  const IntPrice = formatNumber(JSON.stringify(content.price[0]));
+  const price = parseInt(content.price[0]);
+  const IntPrice = formatNumber(JSON.stringify(price));
   const decimals = content.price[1];
   const currency = content.currency;
   const description = content.description;

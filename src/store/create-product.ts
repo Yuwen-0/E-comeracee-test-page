@@ -5,8 +5,8 @@ export const createProductSlice = createSlice({
   initialState: {
     id: 0,
     name: "This is the name of the product",
-    description: null,
-    shortDescription: "",
+    description: "",
+    shortDescription: "This is the short description of the product",
     category: "",
     subcategory: "",
     price: [0, 0],
@@ -22,8 +22,6 @@ export const createProductSlice = createSlice({
     seoTitle: "",
     seoDescription: null,
     metaKeywords: "",
-    createdAt: new Date(),
-    updatedAt: null,
   } as unknown as Product,
   reducers: {
     setImage: (state, action) => {
@@ -44,6 +42,9 @@ export const createProductSlice = createSlice({
     setCategory: (state, action) => {
       state.category = action.payload;
     },
+    setShortDescription: (state, action) => {
+      state.shortDescription = action.payload;
+    },
   },
 });
 
@@ -54,5 +55,6 @@ export const {
   setCurrency,
   setDescription,
   setCategory,
+  setShortDescription,
 } = createProductSlice.actions;
 export default createProductSlice.reducer;

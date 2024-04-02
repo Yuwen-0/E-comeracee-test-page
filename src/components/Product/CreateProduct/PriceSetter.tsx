@@ -17,12 +17,19 @@ const PriceSetter = () => {
   const setPriceValue =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const newPrice = [...price];
+      const value = e.target.value;
       if (index === 0) {
-        const integers = Math.max(parseInt(e.target.value) || 0, 0);
-        newPrice[index] = Math.min(integers, 100000000000);
+        const integers = Math.max(parseInt(value) || 0, 0);
+        newPrice[index] = Math.min(integers, 100000000000).toString();
+        if (integers !== 0) {
+          newPrice[index] = newPrice[index].toString().replace(/^0+/, "");
+        }
       } else {
-        const decimals = Math.max(parseInt(e.target.value) || 0, 0);
-        newPrice[index] = Math.min(decimals, 99);
+        const decimals = Math.max(parseInt(value) || 0, 0);
+        newPrice[index] = Math.min(decimals, 99).toString();
+        if (decimals !== 0) {
+          newPrice[index] = newPrice[index].replace(/^0+/, "");
+        }
       }
       dispatch(setPrice(newPrice));
     };

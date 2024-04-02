@@ -39,9 +39,9 @@ export default function CreateProduct() {
           <PriceSetter />
           <TextSetter
             multiline
-            SetterFunctionName={"setDescription"}
-            valueName="description"
-            id="description"
+            SetterFunctionName={"setShortDescription"}
+            valueName="shortDescription"
+            id="shortDescription"
           />
           <CategorySelector />
         </Box>
