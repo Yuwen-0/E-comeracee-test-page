@@ -28,7 +28,9 @@ const CategorySelectorTemplate = ({
         onChange={Setter}
       >
         {optionsArray.map((ContentName: string) => (
-          <option value={ContentName}>{ContentName}</option>
+          <option key={ContentName} value={ContentName}>
+            {ContentName}
+          </option>
         ))}
       </NativeSelect>
     </FormControl>
