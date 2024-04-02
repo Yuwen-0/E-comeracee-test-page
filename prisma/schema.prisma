@@ -18,7 +18,7 @@ model Customer {
   email     String   @unique
   username  String   @unique
   password  String
-  avatar    String   @default("")
+  avatar    String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,20 +30,13 @@ model Product {
   shortDescription String
   category         String
   subcategory      String
-  brand            String
-  sku              String   @unique
   price            Decimal
   salePrice        Decimal?
   currency         String   @db.VarChar(3)
-  inventoryLevel   Int
   weight           Decimal
   dimensions       String
-  color            String
-  material         String
-  features         String
-  technicalSpecs   String?
+  features         String[]
   image            String
-  videoUrl         String?
   availability     String
   ratings          Decimal?
   numberOfReviews  Int?

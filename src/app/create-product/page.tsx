@@ -3,6 +3,7 @@ import PreviewProduct from "@/components/Product/CreateProduct/PreviewProduct";
 import PriceSetter from "@/components/Product/CreateProduct/PriceSetter";
 import { Box } from "@mui/material";
 import TextSetter from "@/components/Product/CreateProduct/TextSetter";
+import CategorySelector from "@/components/Product/CreateProduct/CategorySelector";
 
 export default function CreateProduct() {
   return (
@@ -24,7 +25,7 @@ export default function CreateProduct() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "10px",
+            gap: "20px",
             flexGrow: 7,
           }}
           id="Inputs"
@@ -42,6 +43,7 @@ export default function CreateProduct() {
             valueName="description"
             id="description"
           />
+          <CategorySelector />
         </Box>
         <Box sx={{ flexGrow: 2, justifyContent: "center" }} id="Preview">
           <PreviewProduct />
