@@ -30,7 +30,7 @@ model Product {
   shortDescription String
   category         String
   subcategory      String
-  price            Decimal
+  price            Int[]
   salePrice        Decimal?
   currency         String   @db.VarChar(3)
   weight           Decimal

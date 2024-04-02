@@ -5,7 +5,7 @@ interface Product {
   shortDescription: string; // Brief product description
   category: string; // Product category
   subcategory: string; // Product subcategory (optional)
-  price: number; // Product price
+  price: number[]; // Product price
   salePrice?: number; // Discounted price (optional)
   currency: string; // Currency code (e.g., USD, EUR)
   weight: number; // Product weight in a suitable unit (e.g., grams, kilograms)

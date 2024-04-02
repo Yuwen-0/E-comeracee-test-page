@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../types/main";
 
 export const createProductSlice = createSlice({
   name: "createProduct",
@@ -25,7 +24,7 @@ export const createProductSlice = createSlice({
     metaKeywords: "",
     createdAt: new Date(),
     updatedAt: null,
-  } as Product,
+  } as unknown as Product,
   reducers: {
     setImage: (state, action) => {
       state.image = action.payload;
@@ -33,7 +32,7 @@ export const createProductSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
-    setPrice: (state, action: { payload: number }) => {
+    setPrice: (state, action: { payload: number[] }) => {
       state.price = action.payload;
     },
     setCurrency: (state, action) => {
